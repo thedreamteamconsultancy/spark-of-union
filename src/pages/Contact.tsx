@@ -137,8 +137,8 @@ const Contact = () => {
                 ) : (
                   <form className="space-y-2.5" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Full Name</label>
-                      <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Full Name</label>
+                      <input type="text" placeholder="Your full name" required style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Phone Number</label>
