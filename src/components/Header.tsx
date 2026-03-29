@@ -236,7 +236,10 @@ const Header = () => {
           zIndex: 201,
           background: '#1A0808',
           transform: mobileOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 380ms cubic-bezier(0.25,0.1,0,1)',
+          visibility: mobileOpen ? 'visible' : 'hidden',
+          transition: mobileOpen
+            ? 'transform 380ms cubic-bezier(0.25,0.1,0,1), visibility 0s'
+            : 'transform 380ms cubic-bezier(0.25,0.1,0,1), visibility 0s 380ms',
           display: 'flex', flexDirection: 'column',
           overflowY: 'auto',
         }}
