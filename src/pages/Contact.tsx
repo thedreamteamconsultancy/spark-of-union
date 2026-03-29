@@ -42,7 +42,7 @@ const Contact = () => {
       <Header />
 
       {/* Hero */}
-      <section className="relative flex items-center justify-center pt-16 overflow-hidden" style={{ height: '50vh', minHeight: '300px' }}>
+      <section className="relative flex items-center justify-center pt-16 overflow-hidden" style={{ height: 'clamp(40vh, 45vh, 50vh)', minHeight: '240px' }}>
         <div className="absolute inset-0">
           <img
             src={CONTACT_HERO} alt="" className="w-full h-full object-cover" loading="eager"
@@ -66,24 +66,24 @@ const Contact = () => {
       </section>
 
       {/* Main Content */}
-      <section className="section-padding" style={{ background: '#FFFDF8' }}>
+      <section className="px-4 py-8 lg:py-16" style={{ background: '#FFFDF8' }}>
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 max-w-6xl mx-auto">
             {/* Left */}
             <div>
               <ScrollReveal>
                 <h2 className="font-display font-light mb-3" style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', color: '#0F0A05' }}>Let's Begin Your Story</h2>
-                <p className="font-accent text-[18px] mb-10" style={{ color: '#9B7A2A' }}>Every great match starts with a conversation</p>
+                <p className="font-accent text-[18px] mb-6 lg:mb-10" style={{ color: '#9B7A2A' }}>Every great match starts with a conversation</p>
 
-                <div className="space-y-6 mb-10">
+                <div className="space-y-4 mb-6 lg:mb-10">
                   {[
                     { icon: Phone, label: "CALL US", text: "+91-9177036777", href: "tel:+919177036777" },
                     { icon: Mail, label: "EMAIL US", text: "info@kammavaari.com", href: "mailto:info@kammavaari.com" },
                     { icon: MapPin, label: "VISIT US", text: "Plot 1282, Road 64, Jubilee Hills, Hyderabad", href: "#" },
                   ].map(c => (
-                    <a key={c.label} href={c.href} className="flex items-center gap-5 group">
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shrink-0" style={{ background: '#FBF5EB', border: '1px solid rgba(201,168,76,0.2)' }}>
-                        <c.icon className="w-5 h-5" style={{ color: '#C9A84C' }} />
+                    <a key={c.label} href={c.href} className="flex items-center gap-3 lg:gap-5 group">
+                      <div className="w-11 h-11 lg:w-14 lg:h-14 rounded-full flex items-center justify-center shrink-0" style={{ background: '#FBF5EB', border: '1px solid rgba(201,168,76,0.2)' }}>
+                        <c.icon className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: '#C9A84C' }} />
                       </div>
                       <div>
                         <p className="font-body font-medium text-[11px] tracking-[0.12em] uppercase mb-1" style={{ color: '#9B7A2A' }}>{c.label}</p>
@@ -96,7 +96,7 @@ const Contact = () => {
                 <a
                   href="https://wa.me/919177036777" target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2.5 font-body text-[15px] font-semibold text-white transition-all"
-                  style={{ height: '56px', background: 'linear-gradient(135deg, #25D366, #1EA952)', borderRadius: '16px', border: 'none' }}
+                  style={{ height: '48px', background: 'linear-gradient(135deg, #25D366, #1EA952)', borderRadius: '16px', border: 'none' }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(37,211,102,0.35)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
@@ -105,7 +105,7 @@ const Contact = () => {
                 </a>
                 <p className="font-body font-light text-[11px] text-center mt-3" style={{ color: '#9B7A2A' }}>Usually responds within 30 minutes</p>
 
-                <div className="mt-8 bg-white rounded-[20px] p-6" style={{ border: '1px solid rgba(201,168,76,0.12)' }}>
+                <div className="mt-6 bg-white rounded-[20px] p-4 lg:p-6" style={{ border: '1px solid rgba(201,168,76,0.12)' }}>
                   <h4 className="font-body font-medium text-[13px] tracking-[0.08em] uppercase mb-4" style={{ color: '#5C4510' }}>Office Hours</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between font-body font-light text-[14px]" style={{ color: '#7A6550' }}>
@@ -121,10 +121,10 @@ const Contact = () => {
 
             {/* Right — Form */}
             <ScrollReveal delay={100}>
-              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: 'clamp(16px,3vw,28px)', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,4vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
+              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: 'clamp(16px,3vw,28px)', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(16px,4vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, #C9A84C, #8B2E2E)' }} />
-                <h2 className="font-display font-semibold mb-2" style={{ fontSize: 'clamp(24px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
-                <p className="font-body font-light text-[14px] mb-6" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
+                <h2 className="font-display font-semibold mb-1" style={{ fontSize: 'clamp(22px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
+                <p className="font-body font-light text-[13px] mb-4 lg:mb-6" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
 
                 {submitted ? (
                   <div className="text-center py-16">
@@ -135,25 +135,25 @@ const Contact = () => {
                     <p className="font-body font-light text-[15px]" style={{ color: '#7A6550' }}>Our team will reach out to you shortly.</p>
                   </div>
                 ) : (
-                  <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+                  <form className="space-y-2.5" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Full Name</label>
-                      <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Full Name</label>
+                      <input type="text" placeholder="Your full name" required style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Phone Number</label>
-                      <input type="tel" placeholder="+91 98765 43210" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Phone Number</label>
+                      <input type="tel" placeholder="+91 98765 43210" required style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Email Address</label>
-                      <input type="email" placeholder="you@email.com" style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Email Address</label>
+                      <input type="email" placeholder="you@email.com" style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>I am looking for</label>
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>I am looking for</label>
               <div className="grid grid-cols-2 gap-3">
                         {(["Bride", "Groom"] as const).map(g => (
-                          <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[14px] font-medium transition-all btn-gold" style={{
-                            height: '44px', borderRadius: '12px', cursor: 'pointer',
+                          <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[13px] font-medium transition-all btn-gold" style={{
+                            height: '38px', borderRadius: '12px', cursor: 'pointer',
                             border: lookingFor === g ? 'none' : '1px solid rgba(201,168,76,0.2)',
                             background: lookingFor === g ? 'linear-gradient(135deg, #C9A84C, #B8923A)' : '#FBF5EB',
                             color: lookingFor === g ? '#0F0A05' : '#9B7A2A',
@@ -165,11 +165,11 @@ const Contact = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Message</label>
-                      <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Message</label>
+                      <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[13px] resize-none" style={{ ...inputStyle, height: '80px', padding: '10px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
-                    <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 btn-gold" style={{
-                      height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
+                    <button type="submit" className="w-full font-body text-[13px] font-semibold flex items-center justify-center gap-2 btn-gold" style={{
+                      height: '42px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
                       borderRadius: '14px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
                     }}>
                       <Send className="w-4 h-4" /> Send Message & Request Callback →
@@ -181,7 +181,7 @@ const Contact = () => {
           </div>
 
           {/* Map + Branches */}
-          <div className="max-w-6xl mx-auto mt-20">
+          <div className="max-w-6xl mx-auto mt-10 lg:mt-20">
             <div style={{ borderTop: '1px solid rgba(201,168,76,0.12)', paddingTop: 'clamp(36px,5vw,56px)' }}>
               <ScrollReveal>
                 <div className="text-center mb-10">

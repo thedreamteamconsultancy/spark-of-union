@@ -42,8 +42,8 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       setTimeout(() => setPhase(3), 800),
       setTimeout(() => setPhase(4), 1400),
       setTimeout(() => setPhase(5), 1700),
-      setTimeout(() => setFadeOut(true), 2700),
-      setTimeout(() => onComplete(), 3300),
+      setTimeout(() => setFadeOut(true), 2400),
+      setTimeout(() => onComplete(), 2800),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
