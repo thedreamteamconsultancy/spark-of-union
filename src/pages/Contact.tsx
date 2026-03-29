@@ -135,7 +135,7 @@ const Contact = () => {
                     <p className="font-body font-light text-[15px]" style={{ color: '#7A6550' }}>Our team will reach out to you shortly.</p>
                   </div>
                 ) : (
-                  <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+                  <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Full Name</label>
                       <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
