@@ -68,7 +68,7 @@ const Contact = () => {
       {/* Main Content */}
       <section className="px-4 py-8 lg:py-16" style={{ background: '#FFFDF8' }}>
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 max-w-6xl mx-auto">
             {/* Left */}
             <div>
               <ScrollReveal>
