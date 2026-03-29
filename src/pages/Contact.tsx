@@ -81,9 +81,9 @@ const Contact = () => {
                     { icon: Mail, label: "EMAIL US", text: "info@kammavaari.com", href: "mailto:info@kammavaari.com" },
                     { icon: MapPin, label: "VISIT US", text: "Plot 1282, Road 64, Jubilee Hills, Hyderabad", href: "#" },
                   ].map(c => (
-                    <a key={c.label} href={c.href} className="flex items-center gap-5 group">
-                      <div className="w-14 h-14 rounded-full flex items-center justify-center shrink-0" style={{ background: '#FBF5EB', border: '1px solid rgba(201,168,76,0.2)' }}>
-                        <c.icon className="w-5 h-5" style={{ color: '#C9A84C' }} />
+                    <a key={c.label} href={c.href} className="flex items-center gap-3 lg:gap-5 group">
+                      <div className="w-11 h-11 lg:w-14 lg:h-14 rounded-full flex items-center justify-center shrink-0" style={{ background: '#FBF5EB', border: '1px solid rgba(201,168,76,0.2)' }}>
+                        <c.icon className="w-4 h-4 lg:w-5 lg:h-5" style={{ color: '#C9A84C' }} />
                       </div>
                       <div>
                         <p className="font-body font-medium text-[11px] tracking-[0.12em] uppercase mb-1" style={{ color: '#9B7A2A' }}>{c.label}</p>
