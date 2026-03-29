@@ -79,6 +79,20 @@ const Footer = () => {
           <p className="font-body font-light text-[11px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
             © {new Date().getFullYear()} Kammavaari Matrimony. All rights reserved.
           </p>
+          <p className="font-body font-light text-[11px] mt-1.5" style={{ color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>
+            Designed & Developed by{' '}
+            <a
+              href="https://www.thedreamteamservices.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors"
+              style={{ color: 'rgba(201,168,76,0.5)', textDecoration: 'none' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(201,168,76,0.8)'; e.currentTarget.style.textDecoration = 'underline'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(201,168,76,0.5)'; e.currentTarget.style.textDecoration = 'none'; }}
+            >
+              DREAM TEAM SERVICES
+            </a>
+          </p>
         </div>
       </div>
     </footer>
