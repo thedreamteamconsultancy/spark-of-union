@@ -121,7 +121,7 @@ const Contact = () => {
 
             {/* Right — Form */}
             <ScrollReveal delay={100}>
-              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: '28px', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(32px,5vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
+              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: '28px', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,5vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, #C9A84C, #8B2E2E)' }} />
                 <h2 className="font-display font-semibold mb-2" style={{ fontSize: 'clamp(24px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
                 <p className="font-body font-light text-[14px] mb-10" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
