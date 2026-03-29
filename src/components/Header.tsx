@@ -260,7 +260,7 @@ const Header = () => {
           </button>
         </div>
 
-        <nav style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '4px', flexGrow: 1 }}>
+        <nav style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '4px', flexGrow: 1, overflowY: 'auto' }}>
           {navLinks.map((link, i) => {
             const isActive = link.children ? isServiceActive : location.pathname === link.to;
 
