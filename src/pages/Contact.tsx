@@ -75,7 +75,7 @@ const Contact = () => {
                 <h2 className="font-display font-light mb-3" style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', color: '#0F0A05' }}>Let's Begin Your Story</h2>
                 <p className="font-accent text-[18px] mb-6 lg:mb-10" style={{ color: '#9B7A2A' }}>Every great match starts with a conversation</p>
 
-                <div className="space-y-6 mb-10">
+                <div className="space-y-4 mb-6 lg:mb-10">
                   {[
                     { icon: Phone, label: "CALL US", text: "+91-9177036777", href: "tel:+919177036777" },
                     { icon: Mail, label: "EMAIL US", text: "info@kammavaari.com", href: "mailto:info@kammavaari.com" },
