@@ -1,13 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import AuthModal from "./AuthModal";
 
 const LOGO_URL = "https://res.cloudinary.com/dvmrhs2ek/image/upload/v1774700099/wjibi9xge8sdyxqhi09a.png";
 
+const serviceLinks = [
+  { label: "Verified Profiles", to: "/services/verified-profiles" },
+  { label: "Dedicated RM", to: "/services/dedicated-rm" },
+  { label: "Privacy Settings", to: "/services/privacy-settings" },
+  { label: "Success Stories", to: "/services/success-stories" },
+];
+
 const navLinks = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
+  { label: "Services", to: "#", children: serviceLinks },
   { label: "Gallery", to: "/gallery" },
   { label: "Premium Plans", to: "/premium-plans" },
   { label: "Contact", to: "/contact" },
@@ -18,6 +26,10 @@ const Header = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const servicesTimeout = useRef<ReturnType<typeof setTimeout>>();
   const location = useLocation();
 
   useEffect(() => {
@@ -28,9 +40,9 @@ const Header = () => {
 
   useEffect(() => {
     setMobileOpen(false);
+    setMobileServicesOpen(false);
   }, [location.pathname]);
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = 'hidden';
@@ -45,6 +57,16 @@ const Header = () => {
     setAuthOpen(true);
     setMobileOpen(false);
   };
+
+  const handleServicesEnter = () => {
+    clearTimeout(servicesTimeout.current);
+    setServicesOpen(true);
+  };
+  const handleServicesLeave = () => {
+    servicesTimeout.current = setTimeout(() => setServicesOpen(false), 200);
+  };
+
+  const isServiceActive = serviceLinks.some(s => location.pathname === s.to);
 
   return (
     <>
@@ -65,14 +87,79 @@ const Header = () => {
             <img
               src={LOGO_URL}
               alt="Kammavaari Matrimony"
-              style={{ height: '40px', filter: scrolled ? 'brightness(1.1)' : 'none', transition: 'filter 300ms' }}
+              style={{ height: 'clamp(32px, 4vw, 40px)', filter: scrolled ? 'brightness(1.1)' : 'none', transition: 'filter 300ms' }}
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center" style={{ gap: '48px' }}>
+          <nav className="hidden lg:flex items-center" style={{ gap: 'clamp(20px, 3vw, 48px)' }}>
             {navLinks.map((link) => {
-              const isActive = location.pathname === link.to;
+              const isActive = link.children ? isServiceActive : location.pathname === link.to;
+
+              if (link.children) {
+                return (
+                  <div
+                    key={link.label}
+                    ref={servicesRef}
+                    className="relative"
+                    onMouseEnter={handleServicesEnter}
+                    onMouseLeave={handleServicesLeave}
+                  >
+                    <button
+                      className="relative font-body text-[13px] font-normal transition-colors group flex items-center gap-1"
+                      style={{ color: isActive ? 'white' : 'rgba(255,255,255,0.78)', background: 'none', border: 'none', cursor: 'pointer' }}
+                    >
+                      <span className="group-hover:text-white transition-colors">{link.label}</span>
+                      <ChevronDown className="w-3.5 h-3.5 transition-transform" style={{ transform: servicesOpen ? 'rotate(180deg)' : 'rotate(0)' }} />
+                      <span
+                        className="absolute bottom-[-2px] left-0 h-[1px] transition-all group-hover:!w-full"
+                        style={{
+                          width: isActive ? '100%' : '0%',
+                          background: 'hsl(40 52% 54%)',
+                          transitionDuration: 'var(--duration-base)',
+                        }}
+                      />
+                    </button>
+
+                    {/* Dropdown */}
+                    <div
+                      style={{
+                        position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)',
+                        minWidth: '220px',
+                        background: 'rgba(15, 10, 5, 0.92)',
+                        backdropFilter: 'blur(24px) saturate(180%)',
+                        border: '1px solid hsla(40,52%,54%,0.2)',
+                        borderRadius: '16px',
+                        padding: '8px',
+                        opacity: servicesOpen ? 1 : 0,
+                        pointerEvents: servicesOpen ? 'auto' : 'none',
+                        transition: 'opacity 250ms ease, transform 250ms ease',
+                        transformOrigin: 'top center',
+                        boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+                      }}
+                    >
+                      {link.children.map(child => (
+                        <Link
+                          key={child.to}
+                          to={child.to}
+                          className="block font-body text-[13px] font-normal transition-all"
+                          style={{
+                            padding: '12px 16px',
+                            borderRadius: '10px',
+                            color: location.pathname === child.to ? '#C9A84C' : 'rgba(255,255,255,0.75)',
+                            textDecoration: 'none',
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.1)'; e.currentTarget.style.color = '#C9A84C'; }}
+                          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = location.pathname === child.to ? '#C9A84C' : 'rgba(255,255,255,0.75)'; }}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={link.label}
@@ -95,7 +182,7 @@ const Header = () => {
           </nav>
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => openAuth("login")}
               className="font-body text-[13px] font-normal transition-all"
@@ -118,7 +205,7 @@ const Header = () => {
 
           {/* Mobile Hamburger */}
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2"
             style={{ color: 'hsl(40 52% 54%)' }}
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
@@ -128,8 +215,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Menu — Overlay + Panel from right */}
-      {/* Overlay */}
+      {/* Mobile Menu — Overlay */}
       <div
         onClick={() => setMobileOpen(false)}
         style={{
@@ -155,7 +241,6 @@ const Header = () => {
           overflowY: 'auto',
         }}
       >
-        {/* Panel Header */}
         <div style={{ padding: '24px 28px', borderBottom: '1px solid rgba(201,168,76,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <img src={LOGO_URL} alt="Logo" style={{ height: '38px', objectFit: 'contain' }} />
           <button
@@ -172,10 +257,57 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Nav Links */}
         <nav style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '4px', flexGrow: 1 }}>
           {navLinks.map((link, i) => {
-            const isActive = location.pathname === link.to;
+            const isActive = link.children ? isServiceActive : location.pathname === link.to;
+
+            if (link.children) {
+              return (
+                <div key={link.label}>
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="font-display block transition-all w-full text-left flex items-center justify-between"
+                    style={{
+                      padding: '14px 0',
+                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      fontSize: '28px', fontWeight: 300,
+                      color: isActive ? '#C9A84C' : 'rgba(255,255,255,0.75)',
+                      letterSpacing: '-0.01em', background: 'none', border: 'none', cursor: 'pointer',
+                      opacity: mobileOpen ? 1 : 0,
+                      transform: mobileOpen ? 'translateX(0)' : 'translateX(-16px)',
+                      transitionDelay: mobileOpen ? `${i * 60}ms` : '0ms',
+                      transitionDuration: '300ms',
+                    }}
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown className="w-5 h-5" style={{ transform: mobileServicesOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 300ms ease' }} />
+                  </button>
+                  <div style={{
+                    maxHeight: mobileServicesOpen ? '300px' : '0',
+                    overflow: 'hidden',
+                    transition: 'max-height 300ms ease',
+                  }}>
+                    {link.children.map(child => (
+                      <Link
+                        key={child.to}
+                        to={child.to}
+                        onClick={() => setMobileOpen(false)}
+                        className="font-body block text-[16px] font-light"
+                        style={{
+                          padding: '10px 0 10px 20px',
+                          color: location.pathname === child.to ? '#C9A84C' : 'rgba(255,255,255,0.55)',
+                          textDecoration: 'none',
+                          borderLeft: '1px solid rgba(201,168,76,0.2)',
+                        }}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
             return (
               <Link
                 key={link.label}
@@ -209,7 +341,6 @@ const Header = () => {
           })}
         </nav>
 
-        {/* Panel Footer */}
         <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(201,168,76,0.12)', display: 'flex', gap: '12px' }}>
           <button
             onClick={() => openAuth("login")}

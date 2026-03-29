@@ -42,8 +42,8 @@ const HowItWorksSection = () => {
   const isStepActive = (i: number) => activeStep >= 0 && i <= activeStep;
 
   return (
-    <section ref={sectionRef} id="journey-section" className="section-padding overflow-hidden" style={{ background: 'hsl(var(--cream-50))' }}>
-      <div className="container mx-auto" style={{ maxWidth: '100%', overflow: 'hidden' }}>
+    <section ref={sectionRef} id="journey-section" className="section-padding" style={{ background: 'hsl(var(--cream-50))' }}>
+      <div className="container mx-auto" style={{ maxWidth: '100%' }}>
         <ScrollReveal>
           <div className="text-center mb-14 md:mb-20">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -61,7 +61,7 @@ const HowItWorksSection = () => {
         </ScrollReveal>
 
         {/* Desktop: horizontal roadmap */}
-        <div className="hidden md:block max-w-5xl mx-auto relative" style={{ overflow: 'hidden' }}>
+        <div className="hidden md:block max-w-5xl mx-auto relative pt-6">
           {/* Connecting line — starts/ends at circle centers */}
           <svg className="absolute pointer-events-none" style={{ top: '32px', left: '12.5%', width: '75%', height: '8px', overflow: 'visible', zIndex: 1 }}>
             <line x1="0" y1="4" x2="100%" y2="4" stroke="hsla(40,52%,54%,0.15)" strokeWidth="1.5" strokeDasharray="6 6" />

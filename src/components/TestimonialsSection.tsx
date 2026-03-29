@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Star } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 const testimonials = [
@@ -29,43 +29,79 @@ const testimonials = [
 const FALLBACK_IMG = "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=70";
 
 const TestimonialsSection = () => {
-  const [activeCard, setActiveCard] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState(0); // -1 left, 1 right
 
+  const goTo = useCallback((index: number) => {
+    setDirection(index > active ? 1 : -1);
+    setActive(index);
+  }, [active]);
+
+  const next = useCallback(() => {
+    setDirection(1);
+    setActive(prev => (prev + 1) % testimonials.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setDirection(-1);
+    setActive(prev => (prev - 1 + testimonials.length) % testimonials.length);
+  }, []);
+
+  // Auto-rotate
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const handleScroll = () => {
-      const cardWidth = container.clientWidth * 0.92;
-      if (cardWidth > 0) setActiveCard(Math.round(container.scrollLeft / cardWidth));
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
+
+  const getCardStyle = (index: number): React.CSSProperties => {
+    const diff = index - active;
+    const normalizedDiff = diff === 0 ? 0 : diff > 0 ? (diff > 1 ? -1 : 1) : (diff < -1 ? 1 : -1);
+    // Handle wrapping
+    const actualDiff = (() => {
+      if (diff === 0) return 0;
+      if (Math.abs(diff) === 1) return diff;
+      if (diff === 2) return -1;
+      if (diff === -2) return 1;
+      return diff;
+    })();
+
+    if (actualDiff === 0) {
+      return {
+        transform: 'perspective(1200px) rotateY(0deg) scale(1) translateX(0)',
+        opacity: 1,
+        zIndex: 10,
+        filter: 'brightness(1)',
+      };
+    }
+    if (actualDiff === 1) {
+      return {
+        transform: 'perspective(1200px) rotateY(-35deg) scale(0.78) translateX(65%)',
+        opacity: 0.5,
+        zIndex: 5,
+        filter: 'brightness(0.5)',
+      };
+    }
+    if (actualDiff === -1) {
+      return {
+        transform: 'perspective(1200px) rotateY(35deg) scale(0.78) translateX(-65%)',
+        opacity: 0.5,
+        zIndex: 5,
+        filter: 'brightness(0.5)',
+      };
+    }
+    return {
+      transform: 'perspective(1200px) rotateY(0deg) scale(0.6) translateX(0)',
+      opacity: 0,
+      zIndex: 0,
+      filter: 'brightness(0.3)',
     };
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const container = scrollRef.current;
-    if (!container || window.innerWidth > 768) return;
-    const hint = setTimeout(() => {
-      container.scrollTo({ left: 30, behavior: 'smooth' });
-      setTimeout(() => container.scrollTo({ left: 0, behavior: 'smooth' }), 600);
-    }, 1500);
-    return () => clearTimeout(hint);
-  }, []);
-
-  const scrollToCard = (index: number) => {
-    const container = scrollRef.current;
-    if (!container) return;
-    const cardWidth = container.clientWidth * 0.92;
-    container.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
-    setActiveCard(index);
   };
 
   return (
     <section className="relative overflow-hidden" style={{ background: 'hsl(var(--ink-900))' }}>
       <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at center, hsla(40,52%,54%,0.06) 0%, transparent 70%)' }} />
 
-      <div className="relative text-center" style={{ padding: 'clamp(48px,8vw,80px) clamp(16px,5vw,24px) clamp(40px,6vw,64px)', zIndex: 1 }}>
+      <div className="relative text-center" style={{ padding: 'clamp(48px,8vw,80px) clamp(16px,5vw,24px) clamp(24px,4vw,40px)', zIndex: 1 }}>
         <ScrollReveal>
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-9 h-[1px]" style={{ background: 'hsl(var(--gold-500))' }} />
@@ -82,103 +118,136 @@ const TestimonialsSection = () => {
         </ScrollReveal>
       </div>
 
-      {/* Desktop: grid, Mobile: scroll-snap */}
-      <div
-        ref={scrollRef}
-        className="stories-scroll relative"
-        style={{ zIndex: 1, display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollBehavior: 'smooth', WebkitOverflowScrolling: 'touch' as any }}
-      >
-        <style>{`
-          @media (min-width: 769px) {
-            .stories-scroll { overflow-x: visible !important; display: grid !important; grid-template-columns: 1fr 1fr 1fr; }
-            .story-card { width: auto !important; }
-          }
-        `}</style>
-
-        {testimonials.map((t) => (
-          <div
-            key={t.names}
-            className="story-card group relative overflow-hidden cursor-pointer flex-shrink-0"
-            style={{ width: 'calc(92vw)', scrollSnapAlign: 'start', height: 'clamp(380px, 55vw, 520px)' }}
-          >
-            <img
-              src={t.image}
-              alt={t.names}
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:brightness-[0.4]"
-              style={{ filter: 'brightness(0.5) saturate(0.9)' }}
-              loading="lazy"
-              onError={(e) => {
-                const el = e.currentTarget;
-                if (!el.dataset.fallbackUsed) {
-                  el.dataset.fallbackUsed = 'true';
-                  el.src = FALLBACK_IMG;
-                }
+      {/* 3D Carousel */}
+      <div className="relative mx-auto" style={{ maxWidth: '900px', height: 'clamp(400px, 55vw, 520px)', perspective: '1200px', zIndex: 1 }}>
+        {testimonials.map((t, i) => {
+          const styles = getCardStyle(i);
+          return (
+            <div
+              key={t.names}
+              className="absolute inset-0 mx-auto overflow-hidden cursor-pointer"
+              style={{
+                width: 'clamp(300px, 70vw, 480px)',
+                height: '100%',
+                borderRadius: '24px',
+                left: '50%',
+                marginLeft: 'clamp(-150px, -35vw, -240px)',
+                transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0, 1)',
+                transformStyle: 'preserve-3d',
+                ...styles,
               }}
-            />
+              onClick={() => {
+                if (i !== active) goTo(i);
+              }}
+            >
+              <img
+                src={t.image}
+                alt={t.names}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ filter: 'brightness(0.45) saturate(0.9)' }}
+                loading="lazy"
+                onError={(e) => {
+                  const el = e.currentTarget;
+                  if (!el.dataset.fallbackUsed) {
+                    el.dataset.fallbackUsed = 'true';
+                    el.src = FALLBACK_IMG;
+                  }
+                }}
+              />
 
-            {/* Top gradient */}
-            <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: '45%', background: 'linear-gradient(to bottom, rgba(15,10,5,0.5), transparent)' }} />
+              {/* Top gradient */}
+              <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: '45%', background: 'linear-gradient(to bottom, rgba(15,10,5,0.5), transparent)' }} />
 
-            {/* Bottom gradient — stronger */}
-            <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(10,5,2,0.98) 0%, rgba(10,5,2,0.8) 35%, rgba(10,5,2,0.3) 60%, transparent 80%)' }} />
+              {/* Bottom gradient */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(10,5,2,0.98) 0%, rgba(10,5,2,0.8) 35%, rgba(10,5,2,0.3) 60%, transparent 80%)' }} />
 
-            {/* Left gold accent line */}
-            <div className="absolute top-0 left-0 w-[3px] h-full pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, hsl(var(--gold-500)) 30%, hsl(var(--gold-500)) 70%, transparent)' }} />
+              {/* Left gold accent */}
+              <div className="absolute top-0 left-0 w-[3px] h-full pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, hsl(var(--gold-500)) 30%, hsl(var(--gold-500)) 70%, transparent)' }} />
 
-            {/* Top ornament */}
-            <div className="absolute top-5 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none" style={{ zIndex: 3 }}>
-              <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="hsla(40,52%,54%,0.35)" /></svg>
-              <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
-            </div>
+              {/* Stars */}
+              <div className="absolute top-6 left-6 flex gap-1" style={{ zIndex: 3 }}>
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <Star key={j} className="w-3 h-3 fill-current" style={{ color: 'hsl(var(--gold-500))' }} />
+                ))}
+              </div>
 
-            {/* Stars — top left */}
-            <div className="absolute top-6 left-6 flex gap-1" style={{ zIndex: 3 }}>
-              {Array.from({ length: 5 }).map((_, j) => (
-                <Star key={j} className="w-3 h-3 fill-current" style={{ color: 'hsl(var(--gold-500))' }} />
-              ))}
-            </div>
+              {/* Top ornament */}
+              <div className="absolute top-5 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none" style={{ zIndex: 3 }}>
+                <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="hsla(40,52%,54%,0.35)" /></svg>
+                <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
+              </div>
 
-            <div className="absolute bottom-0 left-0 right-0" style={{ zIndex: 2, padding: 'clamp(20px, 4vw, 40px) clamp(16px, 3vw, 32px)' }}>
-              <span className="block font-display" style={{ fontSize: 'clamp(48px, 8vw, 80px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
-              <p className="font-accent" style={{ fontSize: 'clamp(15px, 1.7vw, 19px)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: '-12px', fontStyle: 'italic' }}>
-                {t.quote}
-              </p>
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0" style={{ zIndex: 2, padding: 'clamp(20px, 4vw, 36px) clamp(20px, 3vw, 32px)' }}>
+                <span className="block font-display" style={{ fontSize: 'clamp(40px, 6vw, 64px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
+                <p className="font-accent" style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: '-8px', fontStyle: 'italic' }}>
+                  {t.quote}
+                </p>
 
-              <div className="flex items-center gap-3 mt-5">
-                <div className="flex -space-x-3">
-                  {t.initials.map((init, idx) => (
-                    <div key={idx} className="w-11 h-11 rounded-full flex items-center justify-center font-display text-[16px] font-semibold" style={{
-                      background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
-                      border: '2px solid hsl(var(--gold-500))',
-                      color: 'hsl(var(--gold-300))',
-                    }}>
-                      {init}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="font-display font-semibold text-[17px] text-white">{t.names}</p>
-                  <p className="font-body font-light text-[12px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
-                    {t.detail}
-                  </p>
+                <div className="flex items-center gap-3 mt-5">
+                  <div className="flex -space-x-3">
+                    {t.initials.map((init, idx) => (
+                      <div key={idx} className="w-10 h-10 rounded-full flex items-center justify-center font-display text-[15px] font-semibold" style={{
+                        background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
+                        border: '2px solid hsl(var(--gold-500))',
+                        color: 'hsl(var(--gold-300))',
+                      }}>
+                        {init}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="font-display font-semibold text-[16px] text-white">{t.names}</p>
+                    <p className="font-body font-light text-[11px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
+                      {t.detail}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
+
+        {/* Nav arrows */}
+        <button
+          onClick={prev}
+          className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all"
+          style={{
+            left: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px',
+            borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)',
+            backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.15)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(15,10,5,0.6)'; }}
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all"
+          style={{
+            right: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px',
+            borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)',
+            backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.15)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(15,10,5,0.6)'; }}
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
 
-      {/* Mobile scroll dots */}
-      <div className="flex md:hidden justify-center gap-2 relative" style={{ padding: '16px 0', zIndex: 1 }}>
-        {[0, 1, 2].map(i => (
+      {/* Dots */}
+      <div className="flex justify-center gap-2.5 relative" style={{ padding: '24px 0', zIndex: 1 }}>
+        {testimonials.map((_, i) => (
           <button
             key={i}
-            onClick={() => scrollToCard(i)}
+            onClick={() => goTo(i)}
             style={{
-              width: activeCard === i ? '24px' : '8px',
+              width: active === i ? '28px' : '8px',
               height: '8px', borderRadius: '999px',
-              background: activeCard === i ? '#C9A84C' : 'rgba(201,168,76,0.25)',
+              background: active === i ? '#C9A84C' : 'rgba(201,168,76,0.25)',
               border: 'none', cursor: 'pointer', padding: 0,
               transition: 'all 300ms ease',
             }}
@@ -187,7 +256,7 @@ const TestimonialsSection = () => {
         ))}
       </div>
 
-      <div className="text-center relative" style={{ padding: 'clamp(24px,4vw,48px) 24px', zIndex: 1 }}>
+      <div className="text-center relative" style={{ padding: 'clamp(12px,3vw,32px) 24px clamp(40px,6vw,64px)', zIndex: 1 }}>
         <p className="font-body font-light mb-5" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.5)' }}>
           Join 50,000+ families who found their match
         </p>
