@@ -54,6 +54,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       style={{
         backgroundColor: 'hsl(30 50% 4%)',
         opacity: fadeOut ? 0 : 1,
+        transitionDuration: '600ms',
         transitionTimingFunction: 'var(--ease-luxury)',
       }}
     >
