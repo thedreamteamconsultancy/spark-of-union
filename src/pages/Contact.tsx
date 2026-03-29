@@ -68,7 +68,7 @@ const Contact = () => {
       {/* Main Content */}
       <section className="section-padding" style={{ background: '#FFFDF8' }}>
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 max-w-6xl mx-auto">
             {/* Left */}
             <div>
               <ScrollReveal>
@@ -121,7 +121,7 @@ const Contact = () => {
 
             {/* Right — Form */}
             <ScrollReveal delay={100}>
-              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: '28px', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,5vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
+              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: 'clamp(16px,3vw,28px)', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,4vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, #C9A84C, #8B2E2E)' }} />
                 <h2 className="font-display font-semibold mb-2" style={{ fontSize: 'clamp(24px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
                 <p className="font-body font-light text-[14px] mb-10" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
@@ -150,10 +150,10 @@ const Contact = () => {
                     </div>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>I am looking for</label>
-                      <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                         {(["Bride", "Groom"] as const).map(g => (
-                          <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[14px] font-medium transition-all" style={{
-                            height: '50px', borderRadius: '12px', cursor: 'pointer',
+                          <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[14px] font-medium transition-all btn-gold" style={{
+                            height: '44px', borderRadius: '12px', cursor: 'pointer',
                             border: lookingFor === g ? 'none' : '1px solid rgba(201,168,76,0.2)',
                             background: lookingFor === g ? 'linear-gradient(135deg, #C9A84C, #B8923A)' : '#FBF5EB',
                             color: lookingFor === g ? '#0F0A05' : '#9B7A2A',
@@ -168,13 +168,10 @@ const Contact = () => {
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Message</label>
                       <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
-                    <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 transition-all" style={{
+                    <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 btn-gold" style={{
                       height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
                       borderRadius: '14px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
-                    }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}
-                    >
+                    }}>
                       <Send className="w-4 h-4" /> Send Message & Request Callback →
                     </button>
                   </form>
