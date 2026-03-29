@@ -11,6 +11,10 @@ import AboutUs from "./pages/AboutUs.tsx";
 import Contact from "./pages/Contact.tsx";
 import Gallery from "./pages/Gallery.tsx";
 import PremiumPlans from "./pages/PremiumPlans.tsx";
+import VerifiedProfiles from "./pages/VerifiedProfiles.tsx";
+import DedicatedRM from "./pages/DedicatedRM.tsx";
+import PrivacySettings from "./pages/PrivacySettings.tsx";
+import SuccessStories from "./pages/SuccessStories.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -25,6 +29,10 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/premium-plans" element={<PremiumPlans />} />
+        <Route path="/services/verified-profiles" element={<VerifiedProfiles />} />
+        <Route path="/services/dedicated-rm" element={<DedicatedRM />} />
+        <Route path="/services/privacy-settings" element={<PrivacySettings />} />
+        <Route path="/services/success-stories" element={<SuccessStories />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </PageTransition>
