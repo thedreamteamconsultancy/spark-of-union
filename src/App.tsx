@@ -40,18 +40,26 @@ const AnimatedRoutes = () => {
 };
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const handleLoadingComplete = useCallback(() => setLoading(false), []);
+  const [showLoading, setShowLoading] = useState(true);
+  const [loadingDone, setLoadingDone] = useState(false);
+  const handleLoadingComplete = useCallback(() => {
+    setLoadingDone(true);
+    // Keep the dark overlay for a beat so hero can settle
+    setTimeout(() => setShowLoading(false), 400);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {loading && <LoadingScreen onComplete={handleLoadingComplete} />}
-        <BrowserRouter>
-          <AnimatedRoutes />
-        </BrowserRouter>
+        {/* Dark background wrapper prevents white flash */}
+        <div style={{ background: 'hsl(30 50% 4%)', minHeight: '100vh' }}>
+          <BrowserRouter>
+            <AnimatedRoutes />
+          </BrowserRouter>
+        </div>
+        {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </TooltipProvider>
     </QueryClientProvider>
   );
