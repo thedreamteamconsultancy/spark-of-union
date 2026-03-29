@@ -165,8 +165,8 @@ const Contact = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Message</label>
-                      <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Message</label>
+                      <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[13px] resize-none" style={{ ...inputStyle, height: '80px', padding: '10px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
                     <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 btn-gold" style={{
                       height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
