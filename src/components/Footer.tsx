@@ -13,10 +13,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="lg:col-span-1">
             <img src={LOGO_URL} alt="Kammavaari Matrimony" className="mb-4" style={{ height: '36px', filter: 'brightness(0.9)' }} />
-            <p className="font-body font-light text-[13px] leading-[1.75] mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <p className="font-body font-light text-[13px] leading-[1.75] mb-6 line-clamp-2 sm:line-clamp-none" style={{ color: 'rgba(255,255,255,0.55)' }}>
               A trusted community matrimony platform helping families find the perfect match with verified profiles and personalized matchmaking.
             </p>
-            <div className="flex gap-3">
+            <div className="flex" style={{ gap: '12px' }}>
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
                 <a key={i} href="#" className="w-9 h-9 rounded-full flex items-center justify-center transition-all" style={{ border: '1px solid hsla(40,52%,54%,0.3)', color: 'hsl(40 52% 54%)', transitionDuration: 'var(--duration-fast)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'hsl(40 52% 54%)'; e.currentTarget.style.color = 'hsl(30 50% 4%)'; }}

@@ -172,22 +172,24 @@ const PremiumPlans = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {benefits.map((b, i) => (
               <ScrollReveal key={b.title} delay={i * 120}>
-                <div className="why-premium-card group relative overflow-hidden cursor-pointer h-full" style={{ borderRadius: '20px', height: 'clamp(220px, 30vw, 280px)' }}>
+                <div className="group relative overflow-hidden cursor-pointer h-full" style={{ borderRadius: '20px', height: 'clamp(220px, 30vw, 280px)' }}>
                   <img
                     src={benefitImages[i]} alt={b.title}
-                    className="card-bg-img absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.06]"
-                    style={{ filter: 'brightness(0.35) saturate(0.8)' }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    style={{ filter: 'brightness(0.35) saturate(0.8)', transition: 'transform 0.6s ease, filter 0.6s ease' }}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(15,10,5,0.92) 0%, rgba(15,10,5,0.55) 50%, rgba(15,10,5,0.2) 100%)' }} />
+                  <div className="absolute inset-0 transition-opacity duration-[600ms]" style={{ background: 'linear-gradient(to top, rgba(15,10,5,0.92) 0%, rgba(15,10,5,0.55) 50%, rgba(15,10,5,0.2) 100%)' }} />
                   <div className="absolute bottom-0 left-0 right-0 p-6" style={{ zIndex: 2 }}>
-                    <div className="card-icon w-12 h-12 rounded-full flex items-center justify-center mb-3 transition-all duration-300 group-hover:border-[rgba(201,168,76,0.6)]" style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)' }}>
-                      <b.icon className="w-6 h-6" style={{ color: '#C9A84C' }} />
+                    <div className="inline-block rounded-xl transition-all duration-500" style={{ background: 'rgba(10,5,2,0.6)', backdropFilter: 'blur(6px)', padding: '12px 16px' }}>
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center mb-3" style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.25)' }}>
+                        <b.icon className="w-6 h-6" style={{ color: '#C9A84C' }} />
+                      </div>
+                      <h3 className="font-display font-semibold text-[20px] text-white mb-1">{b.title}</h3>
+                      <p className="font-body font-light text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.72)' }}>{b.desc}</p>
                     </div>
-                    <h3 className="font-display font-semibold text-[20px] text-white mb-1">{b.title}</h3>
-                    <p className="font-body font-light text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.72)' }}>{b.desc}</p>
                   </div>
-                  <div className="card-line absolute bottom-0 left-6 right-6 h-[2px] transition-transform duration-[400ms] origin-left scale-x-0 group-hover:scale-x-100" style={{ background: 'linear-gradient(to right, #C9A84C, transparent)' }} />
+                  <div className="absolute bottom-0 left-6 right-6 h-[2px] transition-transform duration-[400ms] origin-left scale-x-0 group-hover:scale-x-100" style={{ background: 'linear-gradient(to right, #C9A84C, transparent)' }} />
                 </div>
               </ScrollReveal>
             ))}

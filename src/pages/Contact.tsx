@@ -169,8 +169,8 @@ const Contact = () => {
                       <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
                     <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 transition-all" style={{
-                      height: '54px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
-                      borderRadius: '16px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
+                      height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
+                      borderRadius: '14px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
                     }}
                       onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}

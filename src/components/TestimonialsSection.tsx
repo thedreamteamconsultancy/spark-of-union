@@ -4,25 +4,25 @@ import ScrollReveal from "./ScrollReveal";
 
 const testimonials = [
   {
-    names: "Lakshmi & Venkata",
-    detail: "Married · March 2022 · Vijayawada",
-    initials: ["L", "V"],
-    quote: "We were introduced through Kammavaari Matrimony in December 2021. Ours was a perfect Telugu wedding in Vijayawada. We are grateful forever.",
-    image: "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?auto=format&fit=crop&w=800&q=70",
+    names: "Hemanth & Sai Nikitha",
+    detail: "Married · Hyderabad",
+    initials: ["H", "S"],
+    quote: "I got connected to my life partner on Kammavaari.com and within a couple of weeks our conversation started. We were very much comfortable. Kammavaari is the best Kamma Matrimony site.",
+    image: "https://res.cloudinary.com/djlrarljg/image/upload/v1774790730/marriage_3_jkyvjh.jpg",
   },
   {
-    names: "Sujatha & Ravi",
-    detail: "Married · June 2023 · Hyderabad",
-    initials: ["S", "R"],
-    quote: "My parents were very particular about community and values. Kammavaari found us a match that honored both. The horoscope matched perfectly too!",
-    image: "https://images.unsplash.com/photo-1583939411023-14783179e581?auto=format&fit=crop&w=800&q=70",
+    names: "Priya & Aakash",
+    detail: "Married · Vijayawada",
+    initials: ["P", "A"],
+    quote: "My parents registered my profile on Kammavaari.com. We received enormous prospect match leads within no time. We chose the best one. Thanks to Kammavaari.com",
+    image: "https://res.cloudinary.com/djlrarljg/image/upload/v1774790731/couple18_viwfhj.jpg",
   },
   {
     names: "Divya & Karthik",
-    detail: "Married · May 2023 · Guntur",
+    detail: "Married · Guntur",
     initials: ["D", "K"],
-    quote: "From the moment we connected on this platform, our families felt at ease. Our Muhurtham was on Akshaya Tritiya — auspicious in every way.",
-    image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=70",
+    quote: "It all started when I received an invite from her on the Kammavaari.com Matrimony portal. I went through her profile and liked everything about her. Thanks to Kammavaari.com",
+    image: "https://res.cloudinary.com/djlrarljg/image/upload/v1774790731/couple17_z2qhxe.jpg",
   },
 ];
 
@@ -30,24 +30,20 @@ const FALLBACK_IMG = "https://images.unsplash.com/photo-1602216056096-3b40cc0c99
 
 const TestimonialsSection = () => {
   const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 left, 1 right
+  const [hovered, setHovered] = useState<number | null>(null);
 
   const goTo = useCallback((index: number) => {
-    setDirection(index > active ? 1 : -1);
     setActive(index);
-  }, [active]);
+  }, []);
 
   const next = useCallback(() => {
-    setDirection(1);
     setActive(prev => (prev + 1) % testimonials.length);
   }, []);
 
   const prev = useCallback(() => {
-    setDirection(-1);
     setActive(prev => (prev - 1 + testimonials.length) % testimonials.length);
   }, []);
 
-  // Auto-rotate
   useEffect(() => {
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
@@ -55,8 +51,6 @@ const TestimonialsSection = () => {
 
   const getCardStyle = (index: number): React.CSSProperties => {
     const diff = index - active;
-    const normalizedDiff = diff === 0 ? 0 : diff > 0 ? (diff > 1 ? -1 : 1) : (diff < -1 ? 1 : -1);
-    // Handle wrapping
     const actualDiff = (() => {
       if (diff === 0) return 0;
       if (Math.abs(diff) === 1) return diff;
@@ -68,32 +62,24 @@ const TestimonialsSection = () => {
     if (actualDiff === 0) {
       return {
         transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(1)',
-        opacity: 1,
-        zIndex: 10,
-        filter: 'brightness(1)',
+        opacity: 1, zIndex: 10, filter: 'brightness(1)',
       };
     }
     if (actualDiff === 1) {
       return {
         transform: 'translateX(calc(-50% + 65%)) perspective(1200px) rotateY(-35deg) scale(0.78)',
-        opacity: 0.5,
-        zIndex: 5,
-        filter: 'brightness(0.5)',
+        opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)',
       };
     }
     if (actualDiff === -1) {
       return {
         transform: 'translateX(calc(-50% - 65%)) perspective(1200px) rotateY(35deg) scale(0.78)',
-        opacity: 0.5,
-        zIndex: 5,
-        filter: 'brightness(0.5)',
+        opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)',
       };
     }
     return {
       transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(0.6)',
-      opacity: 0,
-      zIndex: 0,
-      filter: 'brightness(0.3)',
+      opacity: 0, zIndex: 0, filter: 'brightness(0.3)',
     };
   };
 
@@ -122,6 +108,7 @@ const TestimonialsSection = () => {
       <div className="relative mx-auto flex items-center justify-center" style={{ maxWidth: '1000px', height: 'clamp(400px, 55vw, 520px)', perspective: '1200px', zIndex: 1 }}>
         {testimonials.map((t, i) => {
           const styles = getCardStyle(i);
+          const isHovered = hovered === i && i === active;
           return (
             <div
               key={t.names}
@@ -135,30 +122,32 @@ const TestimonialsSection = () => {
                 transformStyle: 'preserve-3d',
                 ...styles,
               }}
-              onClick={() => {
-                if (i !== active) goTo(i);
-              }}
+              onClick={() => { if (i !== active) goTo(i); }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
             >
               <img
                 src={t.image}
                 alt={t.names}
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: 'brightness(0.45) saturate(0.9)' }}
+                style={{
+                  transition: 'transform 0.6s ease, filter 0.6s ease',
+                  transform: isHovered ? 'scale(1.06)' : 'scale(1)',
+                  filter: isHovered ? 'brightness(0.85) saturate(1.1)' : 'brightness(0.45) saturate(0.9)',
+                }}
                 loading="lazy"
                 onError={(e) => {
                   const el = e.currentTarget;
-                  if (!el.dataset.fallbackUsed) {
-                    el.dataset.fallbackUsed = 'true';
-                    el.src = FALLBACK_IMG;
-                  }
+                  if (!el.dataset.fallbackUsed) { el.dataset.fallbackUsed = 'true'; el.src = FALLBACK_IMG; }
                 }}
               />
 
-              {/* Top gradient */}
-              <div className="absolute top-0 left-0 right-0 pointer-events-none" style={{ height: '45%', background: 'linear-gradient(to bottom, rgba(15,10,5,0.5), transparent)' }} />
-
-              {/* Bottom gradient */}
-              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(10,5,2,0.98) 0%, rgba(10,5,2,0.8) 35%, rgba(10,5,2,0.3) 60%, transparent 80%)' }} />
+              {/* Dark overlay — fades on hover */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: 'linear-gradient(to top, rgba(10,5,2,0.98) 0%, rgba(10,5,2,0.8) 35%, rgba(10,5,2,0.3) 60%, transparent 80%)',
+                opacity: isHovered ? 0.25 : 1,
+                transition: 'opacity 0.6s ease',
+              }} />
 
               {/* Left gold accent */}
               <div className="absolute top-0 left-0 w-[3px] h-full pointer-events-none" style={{ background: 'linear-gradient(to bottom, transparent, hsl(var(--gold-500)) 30%, hsl(var(--gold-500)) 70%, transparent)' }} />
@@ -170,37 +159,38 @@ const TestimonialsSection = () => {
                 ))}
               </div>
 
-              {/* Top ornament */}
-              <div className="absolute top-5 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none" style={{ zIndex: 3 }}>
-                <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="hsla(40,52%,54%,0.35)" /></svg>
-                <div className="w-6 h-[1px]" style={{ background: 'hsla(40,52%,54%,0.3)' }} />
-              </div>
-
-              {/* Content */}
+              {/* Content — has its own dark bg pill for readability */}
               <div className="absolute bottom-0 left-0 right-0" style={{ zIndex: 2, padding: 'clamp(20px, 4vw, 36px) clamp(20px, 3vw, 32px)' }}>
-                <span className="block font-display" style={{ fontSize: 'clamp(40px, 6vw, 64px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
-                <p className="font-accent" style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: '-8px', fontStyle: 'italic' }}>
-                  {t.quote}
-                </p>
+                <div style={{
+                  background: isHovered ? 'rgba(10,5,2,0.75)' : 'transparent',
+                  borderRadius: '16px',
+                  padding: isHovered ? '16px' : '0',
+                  transition: 'all 0.6s ease',
+                  backdropFilter: isHovered ? 'blur(8px)' : 'none',
+                }}>
+                  <span className="block font-display" style={{ fontSize: 'clamp(40px, 6vw, 64px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
+                  <p className="font-accent" style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: '-8px', fontStyle: 'italic' }}>
+                    {t.quote}
+                  </p>
 
-                <div className="flex items-center gap-3 mt-5">
-                  <div className="flex -space-x-3">
-                    {t.initials.map((init, idx) => (
-                      <div key={idx} className="w-10 h-10 rounded-full flex items-center justify-center font-display text-[15px] font-semibold" style={{
-                        background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
-                        border: '2px solid hsl(var(--gold-500))',
-                        color: 'hsl(var(--gold-300))',
-                      }}>
-                        {init}
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <p className="font-display font-semibold text-[16px] text-white">{t.names}</p>
-                    <p className="font-body font-light text-[11px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
-                      {t.detail}
-                    </p>
+                  <div className="flex items-center gap-3 mt-5">
+                    <div className="flex -space-x-3">
+                      {t.initials.map((init, idx) => (
+                        <div key={idx} className="w-10 h-10 rounded-full flex items-center justify-center font-display text-[15px] font-semibold" style={{
+                          background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
+                          border: '2px solid hsl(var(--gold-500))',
+                          color: 'hsl(var(--gold-300))',
+                        }}>
+                          {init}
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <p className="font-display font-semibold text-[16px] text-white">{t.names}</p>
+                      <p className="font-body font-light text-[11px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
+                        {t.detail}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

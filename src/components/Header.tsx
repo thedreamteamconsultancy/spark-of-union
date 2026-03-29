@@ -344,7 +344,7 @@ const Header = () => {
           })}
         </nav>
 
-        <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(201,168,76,0.12)', display: 'flex', gap: '12px' }}>
+        <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(201,168,76,0.12)', display: 'flex', gap: '12px', flexShrink: 0 }}>
           <button
             onClick={() => openAuth("login")}
             className="font-body"

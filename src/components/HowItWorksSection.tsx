@@ -61,25 +61,24 @@ const HowItWorksSection = () => {
         </ScrollReveal>
 
         {/* Desktop timeline */}
-        <div className="hidden md:block relative px-4">
-          {/* Connecting line — contained within the circles */}
-          <div className="absolute" style={{
-            top: '36px',
-            left: 'calc(12.5% + 36px)',
-            right: 'calc(12.5% + 36px)',
-            height: '2px',
-            zIndex: 0,
-          }}>
-            <div className="w-full h-full" style={{ background: 'hsla(40,52%,54%,0.15)' }} />
-            <div className="absolute top-0 left-0 h-full" style={{
-              width: `${activeStep >= 0 ? (activeStep / (steps.length - 1)) * 100 : 0}%`,
-              background: 'hsl(var(--gold-500))',
-              transition: 'width 0.8s cubic-bezier(0.25,0.1,0,1)',
-              borderRadius: '2px',
-            }} />
-          </div>
-
-          <div className="grid grid-cols-4 gap-6">
+        <div className="hidden md:block relative" style={{ overflow: 'hidden' }}>
+          <div className="grid grid-cols-4" style={{ gap: '24px' }}>
+            {/* Connecting line — spans from center of col 1 to center of col 4 */}
+            <div className="absolute pointer-events-none" style={{
+              top: '36px',
+              left: 'calc(12.5%)',
+              right: 'calc(12.5%)',
+              height: '2px',
+              zIndex: 0,
+            }}>
+              <div className="w-full h-full" style={{ background: 'hsla(40,52%,54%,0.15)' }} />
+              <div className="absolute top-0 left-0 h-full" style={{
+                width: `${activeStep >= 0 ? (activeStep / (steps.length - 1)) * 100 : 0}%`,
+                background: 'hsl(var(--gold-500))',
+                transition: 'width 0.8s cubic-bezier(0.25,0.1,0,1)',
+                borderRadius: '2px',
+              }} />
+            </div>
             {steps.map((step, i) => {
               const active = isStepActive(i);
               return (
