@@ -28,32 +28,35 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
-            <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Quick Links</h4>
-            <ul className="space-y-3">
-              {[{ label: "Home", to: "/" }, { label: "About Us", to: "/about" }, { label: "Gallery", to: "/gallery" }, { label: "Premium Plans", to: "/premium-plans" }].map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  >{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Quick Links + Services: side-by-side on mobile */}
+          <div className="grid grid-cols-2 gap-6 sm:contents">
+            <div>
+              <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Quick Links</h4>
+              <ul className="space-y-3">
+                {[{ label: "Home", to: "/" }, { label: "About Us", to: "/about" }, { label: "Gallery", to: "/gallery" }, { label: "Premium Plans", to: "/premium-plans" }].map((link) => (
+                  <li key={link.label}>
+                    <Link to={link.to} className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                    >{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Services</h4>
-            <ul className="space-y-3">
-              {["Verified Profiles", "Dedicated RM", "Privacy Settings", "Success Stories"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  >{link}</a>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Services</h4>
+              <ul className="space-y-3">
+                {["Verified Profiles", "Dedicated RM", "Privacy Settings", "Success Stories"].map((link) => (
+                  <li key={link}>
+                    <a href="#" className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                    >{link}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div>
