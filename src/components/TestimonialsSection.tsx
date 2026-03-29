@@ -67,7 +67,7 @@ const TestimonialsSection = () => {
 
     if (actualDiff === 0) {
       return {
-        transform: 'perspective(1200px) rotateY(0deg) scale(1) translateX(0)',
+        transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(1)',
         opacity: 1,
         zIndex: 10,
         filter: 'brightness(1)',
@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
     }
     if (actualDiff === 1) {
       return {
-        transform: 'perspective(1200px) rotateY(-35deg) scale(0.78) translateX(65%)',
+        transform: 'translateX(calc(-50% + 65%)) perspective(1200px) rotateY(-35deg) scale(0.78)',
         opacity: 0.5,
         zIndex: 5,
         filter: 'brightness(0.5)',
@@ -83,14 +83,14 @@ const TestimonialsSection = () => {
     }
     if (actualDiff === -1) {
       return {
-        transform: 'perspective(1200px) rotateY(35deg) scale(0.78) translateX(-65%)',
+        transform: 'translateX(calc(-50% - 65%)) perspective(1200px) rotateY(35deg) scale(0.78)',
         opacity: 0.5,
         zIndex: 5,
         filter: 'brightness(0.5)',
       };
     }
     return {
-      transform: 'perspective(1200px) rotateY(0deg) scale(0.6) translateX(0)',
+      transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(0.6)',
       opacity: 0,
       zIndex: 0,
       filter: 'brightness(0.3)',
