@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 const ABOUT_HERO = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=75";
 const ABOUT_FALLBACK = "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=75";
 const STORY_IMG = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80";
-const CHAIRMAN_IMG = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80";
+const CHAIRMAN_IMG = "https://res.cloudinary.com/djlrarljg/image/upload/v1774790524/1_gyolvt.jpg";
 
 const stats = [
   { icon: Heart, value: 10000, suffix: "+", label: "Happy Matches" },
@@ -255,15 +255,31 @@ const AboutUs = () => (
                 <img
                   src={valueImages[i]}
                   alt={v.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.08]"
-                  style={{ filter: 'brightness(0.35) saturate(0.8)' }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ transition: 'transform 0.6s ease, filter 0.6s ease' }}
+                  loading="lazy"
+                  onMouseEnter={() => {}}
+                />
+                <div className="absolute inset-0 transition-opacity duration-[600ms]" style={{ background: 'linear-gradient(to top, rgba(15,10,5,0.92) 0%, rgba(15,10,5,0.55) 50%, rgba(15,10,5,0.2) 100%)' }} />
+                <style>{`
+                  .values-card-${i}:hover .values-bg { transform: scale(1.06); filter: brightness(0.8) saturate(1.1) !important; }
+                  .values-card-${i}:hover .values-overlay { opacity: 0.3 !important; }
+                  .values-card-${i} .values-bg { filter: brightness(0.35) saturate(0.8); transition: transform 0.6s ease, filter 0.6s ease; }
+                  .values-card-${i} .values-overlay { transition: opacity 0.6s ease; }
+                `}</style>
+                <img
+                  src={valueImages[i]}
+                  alt={v.title}
+                  className={`values-bg absolute inset-0 w-full h-full object-cover`}
                   loading="lazy"
                 />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(15,10,5,0.92) 0%, rgba(15,10,5,0.55) 50%, rgba(15,10,5,0.2) 100%)' }} />
-                <div className="absolute bottom-0 left-0 right-0" style={{ padding: 'clamp(16px,3vw,24px)', zIndex: 2 }}>
-                  <span style={{ color: '#C9A84C', fontSize: '22px', display: 'block', marginBottom: '8px' }}>{v.icon}</span>
-                  <h3 className="font-display font-semibold text-white mb-1" style={{ fontSize: 'clamp(18px,2.5vw,22px)' }}>{v.title}</h3>
-                  <p className="font-body font-light text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.72)' }}>{v.body}</p>
+                <div className={`values-overlay absolute inset-0`} style={{ background: 'linear-gradient(to top, rgba(15,10,5,0.92) 0%, rgba(15,10,5,0.55) 50%, rgba(15,10,5,0.2) 100%)' }} />
+                <div className="absolute bottom-0 left-0 right-0 relative" style={{ padding: 'clamp(16px,3vw,24px)', zIndex: 2 }}>
+                  <div className="inline-block rounded-xl transition-all duration-500" style={{ background: 'rgba(10,5,2,0.6)', backdropFilter: 'blur(6px)', padding: '12px 16px' }}>
+                    <span style={{ color: '#C9A84C', fontSize: '22px', display: 'block', marginBottom: '8px' }}>{v.icon}</span>
+                    <h3 className="font-display font-semibold text-white mb-1" style={{ fontSize: 'clamp(18px,2.5vw,22px)' }}>{v.title}</h3>
+                    <p className="font-body font-light text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.72)' }}>{v.body}</p>
+                  </div>
                 </div>
                 <div className="absolute bottom-0 left-6 right-6 h-[2px] transition-transform duration-[400ms] origin-left scale-x-0 group-hover:scale-x-100" style={{ background: 'linear-gradient(to right, #C9A84C, transparent)' }} />
               </div>

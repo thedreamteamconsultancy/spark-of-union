@@ -22,7 +22,7 @@ const Contact = () => {
   const [selectedBranch, setSelectedBranch] = useState(0);
 
   const inputStyle: React.CSSProperties = {
-    width: '100%', height: '52px', padding: '0 20px', borderRadius: '14px',
+    width: '100%', height: '44px', padding: '0 16px', borderRadius: '14px',
     border: '1px solid rgba(201,168,76,0.2)', background: '#FBF5EB',
     fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 400,
     color: '#0F0A05', outline: 'none', transition: 'border-color 200ms ease, box-shadow 200ms ease',
@@ -121,7 +121,7 @@ const Contact = () => {
 
             {/* Right — Form */}
             <ScrollReveal delay={100}>
-              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: '28px', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(32px,5vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
+              <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: '28px', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,5vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, #C9A84C, #8B2E2E)' }} />
                 <h2 className="font-display font-semibold mb-2" style={{ fontSize: 'clamp(24px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
                 <p className="font-body font-light text-[14px] mb-10" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
@@ -135,7 +135,7 @@ const Contact = () => {
                     <p className="font-body font-light text-[15px]" style={{ color: '#7A6550' }}>Our team will reach out to you shortly.</p>
                   </div>
                 ) : (
-                  <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+                  <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Full Name</label>
                       <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
@@ -166,11 +166,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Message</label>
-                      <textarea rows={4} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[15px] resize-none" style={{ ...inputStyle, height: '130px', padding: '16px 20px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
+                      <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
                     <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 transition-all" style={{
-                      height: '54px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
-                      borderRadius: '16px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
+                      height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
+                      borderRadius: '14px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
                     }}
                       onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; }}
                       onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; }}

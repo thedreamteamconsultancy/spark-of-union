@@ -260,7 +260,7 @@ const Header = () => {
           </button>
         </div>
 
-        <nav style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '4px', flexGrow: 1 }}>
+        <nav style={{ padding: '32px 28px', display: 'flex', flexDirection: 'column', gap: '4px', flexGrow: 1, overflowY: 'auto' }}>
           {navLinks.map((link, i) => {
             const isActive = link.children ? isServiceActive : location.pathname === link.to;
 
@@ -344,7 +344,7 @@ const Header = () => {
           })}
         </nav>
 
-        <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(201,168,76,0.12)', display: 'flex', gap: '12px' }}>
+        <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(201,168,76,0.12)', display: 'flex', gap: '12px', flexShrink: 0 }}>
           <button
             onClick={() => openAuth("login")}
             className="font-body"

@@ -10,13 +10,13 @@ const Footer = () => {
       <div className="h-[1px]" style={{ background: 'hsla(40,52%,54%,0.2)' }} />
 
       <div className="container mx-auto px-4 py-16 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-12">
+          <div className="lg:col-span-1">
             <img src={LOGO_URL} alt="Kammavaari Matrimony" className="mb-4" style={{ height: '36px', filter: 'brightness(0.9)' }} />
-            <p className="font-body font-light text-[13px] leading-[1.75] mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+            <p className="font-body font-light text-[13px] leading-[1.75] mb-6 line-clamp-2 sm:line-clamp-none" style={{ color: 'rgba(255,255,255,0.55)' }}>
               A trusted community matrimony platform helping families find the perfect match with verified profiles and personalized matchmaking.
             </p>
-            <div className="flex gap-3">
+            <div className="flex" style={{ gap: '12px' }}>
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
                 <a key={i} href="#" className="w-9 h-9 rounded-full flex items-center justify-center transition-all" style={{ border: '1px solid hsla(40,52%,54%,0.3)', color: 'hsl(40 52% 54%)', transitionDuration: 'var(--duration-fast)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'hsl(40 52% 54%)'; e.currentTarget.style.color = 'hsl(30 50% 4%)'; }}
@@ -28,32 +28,35 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
-            <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Quick Links</h4>
-            <ul className="space-y-3">
-              {[{ label: "Home", to: "/" }, { label: "About Us", to: "/about" }, { label: "Gallery", to: "/gallery" }, { label: "Premium Plans", to: "/premium-plans" }].map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  >{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Quick Links + Services: side-by-side on mobile */}
+          <div className="grid grid-cols-2 gap-6 sm:contents">
+            <div>
+              <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Quick Links</h4>
+              <ul className="space-y-3">
+                {[{ label: "Home", to: "/" }, { label: "About Us", to: "/about" }, { label: "Gallery", to: "/gallery" }, { label: "Premium Plans", to: "/premium-plans" }].map((link) => (
+                  <li key={link.label}>
+                    <Link to={link.to} className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                    >{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Services</h4>
-            <ul className="space-y-3">
-              {["Verified Profiles", "Dedicated RM", "Privacy Settings", "Success Stories"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
-                    onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-                  >{link}</a>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h4 className="eyebrow mb-5" style={{ color: 'hsl(40 52% 54%)' }}>Services</h4>
+              <ul className="space-y-3">
+                {["Verified Profiles", "Dedicated RM", "Privacy Settings", "Success Stories"].map((link) => (
+                  <li key={link}>
+                    <a href="#" className="font-body font-light text-[13px] transition-colors" style={{ color: 'rgba(255,255,255,0.55)' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'hsl(40 66% 71%)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
+                    >{link}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div>
@@ -75,6 +78,20 @@ const Footer = () => {
         <div className="mt-12 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <p className="font-body font-light text-[11px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
             © {new Date().getFullYear()} Kammavaari Matrimony. All rights reserved.
+          </p>
+          <p className="font-body font-light text-[11px] mt-1.5" style={{ color: 'rgba(255,255,255,0.3)', letterSpacing: '0.06em' }}>
+            Designed & Developed by{' '}
+            <a
+              href="https://www.thedreamteamservices.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors"
+              style={{ color: 'rgba(201,168,76,0.5)', textDecoration: 'none' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(201,168,76,0.8)'; e.currentTarget.style.textDecoration = 'underline'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(201,168,76,0.5)'; e.currentTarget.style.textDecoration = 'none'; }}
+            >
+              DREAM TEAM SERVICES
+            </a>
           </p>
         </div>
       </div>
