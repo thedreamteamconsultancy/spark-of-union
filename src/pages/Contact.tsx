@@ -96,7 +96,7 @@ const Contact = () => {
                 <a
                   href="https://wa.me/919177036777" target="_blank" rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2.5 font-body text-[15px] font-semibold text-white transition-all"
-                  style={{ height: '56px', background: 'linear-gradient(135deg, #25D366, #1EA952)', borderRadius: '16px', border: 'none' }}
+                  style={{ height: '48px', background: 'linear-gradient(135deg, #25D366, #1EA952)', borderRadius: '16px', border: 'none' }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(37,211,102,0.35)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
                 >
