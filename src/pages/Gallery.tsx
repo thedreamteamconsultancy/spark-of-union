@@ -70,24 +70,31 @@ const Gallery = () => {
       {/* Filter tabs + Grid */}
       <section className="section-padding" style={{ background: '#FFFDF8' }}>
         <div className="container mx-auto">
-          <div className="flex flex-nowrap justify-start md:justify-center gap-2 mb-12 sticky top-[72px] z-50 bg-white/90 backdrop-blur-md py-4 -mx-4 px-4 border-b overflow-x-auto" style={{ borderColor: 'rgba(201,168,76,0.15)', scrollbarWidth: 'none' as any }}>
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className="font-body text-[13px] font-normal transition-all whitespace-nowrap shrink-0"
-                style={{
-                  padding: '8px 22px',
-                  borderRadius: '999px',
-                  border: filter === cat ? 'none' : '1px solid rgba(201,168,76,0.3)',
-                  background: filter === cat ? '#C9A84C' : 'transparent',
-                  color: filter === cat ? '#0F0A05' : '#7A6550',
-                  cursor: 'pointer',
-                }}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="sticky top-[72px] z-50 -mx-4 px-4 py-3 mb-10" style={{
+            background: 'rgba(255,253,248,0.85)',
+            backdropFilter: 'blur(16px) saturate(180%)',
+            borderBottom: '1px solid rgba(201,168,76,0.1)',
+          }}>
+            <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto" style={{ scrollbarWidth: 'none' as any }}>
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className="font-body text-[12px] font-medium transition-all whitespace-nowrap shrink-0"
+                  style={{
+                    padding: '7px 18px',
+                    borderRadius: '999px',
+                    border: filter === cat ? 'none' : '1px solid rgba(201,168,76,0.25)',
+                    background: filter === cat ? '#C9A84C' : 'transparent',
+                    color: filter === cat ? '#0F0A05' : '#7A6550',
+                    cursor: 'pointer',
+                    boxShadow: filter === cat ? '0 2px 12px rgba(201,168,76,0.3)' : 'none',
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 max-w-6xl mx-auto">

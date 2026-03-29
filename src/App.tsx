@@ -41,11 +41,16 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   const [showLoading, setShowLoading] = useState(true);
-  const [loadingDone, setLoadingDone] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
   const handleLoadingComplete = useCallback(() => {
-    setLoadingDone(true);
-    // Keep the dark overlay for a beat so hero can settle
-    setTimeout(() => setShowLoading(false), 400);
+    // First make content visible behind loading screen
+    setContentVisible(true);
+    // Then remove loading screen after content has rendered
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setShowLoading(false);
+      });
+    });
   }, []);
 
   return (
@@ -53,11 +58,12 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {/* Dark background wrapper prevents white flash */}
         <div style={{ background: 'hsl(30 50% 4%)', minHeight: '100vh' }}>
-          <BrowserRouter>
-            <AnimatedRoutes />
-          </BrowserRouter>
+          <div style={{ opacity: contentVisible ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+            <BrowserRouter>
+              <AnimatedRoutes />
+            </BrowserRouter>
+          </div>
         </div>
         {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </TooltipProvider>

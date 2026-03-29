@@ -279,7 +279,6 @@ const HeroSection = () => {
         style={{ zIndex: 3, animation: 'fadeUp 0.8s var(--ease-luxury) 1.4s both' }}
       >
         <div className="w-[1px] h-7" style={{ background: 'hsl(var(--gold-500))', animation: 'scrollPulse 2s ease-in-out infinite' }} />
-        <span className="eyebrow" style={{ color: 'hsl(var(--ink-200))', fontSize: '9px' }}>SCROLL</span>
       </div>
     </section>
   );
