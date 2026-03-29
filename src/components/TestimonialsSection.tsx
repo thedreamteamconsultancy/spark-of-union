@@ -67,7 +67,7 @@ const TestimonialsSection = () => {
 
     if (actualDiff === 0) {
       return {
-        transform: 'perspective(1200px) rotateY(0deg) scale(1) translateX(0)',
+        transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(1)',
         opacity: 1,
         zIndex: 10,
         filter: 'brightness(1)',
@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
     }
     if (actualDiff === 1) {
       return {
-        transform: 'perspective(1200px) rotateY(-35deg) scale(0.78) translateX(65%)',
+        transform: 'translateX(calc(-50% + 65%)) perspective(1200px) rotateY(-35deg) scale(0.78)',
         opacity: 0.5,
         zIndex: 5,
         filter: 'brightness(0.5)',
@@ -83,14 +83,14 @@ const TestimonialsSection = () => {
     }
     if (actualDiff === -1) {
       return {
-        transform: 'perspective(1200px) rotateY(35deg) scale(0.78) translateX(-65%)',
+        transform: 'translateX(calc(-50% - 65%)) perspective(1200px) rotateY(35deg) scale(0.78)',
         opacity: 0.5,
         zIndex: 5,
         filter: 'brightness(0.5)',
       };
     }
     return {
-      transform: 'perspective(1200px) rotateY(0deg) scale(0.6) translateX(0)',
+      transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(0.6)',
       opacity: 0,
       zIndex: 0,
       filter: 'brightness(0.3)',
@@ -119,19 +119,18 @@ const TestimonialsSection = () => {
       </div>
 
       {/* 3D Carousel */}
-      <div className="relative mx-auto" style={{ maxWidth: '900px', height: 'clamp(400px, 55vw, 520px)', perspective: '1200px', zIndex: 1 }}>
+      <div className="relative mx-auto flex items-center justify-center" style={{ maxWidth: '1000px', height: 'clamp(400px, 55vw, 520px)', perspective: '1200px', zIndex: 1 }}>
         {testimonials.map((t, i) => {
           const styles = getCardStyle(i);
           return (
             <div
               key={t.names}
-              className="absolute inset-0 mx-auto overflow-hidden cursor-pointer"
+              className="absolute overflow-hidden cursor-pointer"
               style={{
                 width: 'clamp(300px, 70vw, 480px)',
                 height: '100%',
                 borderRadius: '24px',
                 left: '50%',
-                marginLeft: 'clamp(-150px, -35vw, -240px)',
                 transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0, 1)',
                 transformStyle: 'preserve-3d',
                 ...styles,
