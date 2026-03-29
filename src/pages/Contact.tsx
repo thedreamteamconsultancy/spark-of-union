@@ -153,7 +153,7 @@ const Contact = () => {
               <div className="grid grid-cols-2 gap-3">
                         {(["Bride", "Groom"] as const).map(g => (
                           <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[13px] font-medium transition-all btn-gold" style={{
-                            height: '44px', borderRadius: '12px', cursor: 'pointer',
+                            height: '38px', borderRadius: '12px', cursor: 'pointer',
                             border: lookingFor === g ? 'none' : '1px solid rgba(201,168,76,0.2)',
                             background: lookingFor === g ? 'linear-gradient(135deg, #C9A84C, #B8923A)' : '#FBF5EB',
                             color: lookingFor === g ? '#0F0A05' : '#9B7A2A',
