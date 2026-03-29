@@ -22,7 +22,7 @@ const Contact = () => {
   const [selectedBranch, setSelectedBranch] = useState(0);
 
   const inputStyle: React.CSSProperties = {
-    width: '100%', height: '52px', padding: '0 20px', borderRadius: '14px',
+    width: '100%', height: '44px', padding: '0 16px', borderRadius: '14px',
     border: '1px solid rgba(201,168,76,0.2)', background: '#FBF5EB',
     fontFamily: 'Inter, sans-serif', fontSize: '15px', fontWeight: 400,
     color: '#0F0A05', outline: 'none', transition: 'border-color 200ms ease, box-shadow 200ms ease',
