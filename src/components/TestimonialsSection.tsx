@@ -131,8 +131,6 @@ const TestimonialsSection = () => {
                 height: '100%',
                 borderRadius: '24px',
                 left: '50%',
-                transform: 'translateX(-50%)',
-                marginLeft: '0',
                 transition: 'all 0.7s cubic-bezier(0.25, 0.1, 0, 1)',
                 transformStyle: 'preserve-3d',
                 ...styles,
