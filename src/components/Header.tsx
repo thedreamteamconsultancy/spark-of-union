@@ -241,7 +241,7 @@ const Header = () => {
             ? 'transform 380ms cubic-bezier(0.25,0.1,0,1), visibility 0s'
             : 'transform 380ms cubic-bezier(0.25,0.1,0,1), visibility 0s 380ms',
           display: 'flex', flexDirection: 'column',
-          overflowY: 'auto',
+          overflow: 'hidden',
         }}
       >
         <div style={{ padding: '24px 28px', borderBottom: '1px solid rgba(201,168,76,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
