@@ -274,12 +274,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
-        style={{ zIndex: 3, animation: 'fadeUp 0.8s var(--ease-luxury) 1.4s both' }}
-      >
-        <div className="w-[1px] h-7" style={{ background: 'hsl(var(--gold-500))', animation: 'scrollPulse 2s ease-in-out infinite' }} />
-      </div>
     </section>
   );
 };
