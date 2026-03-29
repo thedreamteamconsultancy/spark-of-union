@@ -42,8 +42,8 @@ const HowItWorksSection = () => {
   const isStepActive = (i: number) => activeStep >= 0 && i <= activeStep;
 
   return (
-    <section ref={sectionRef} id="journey-section" className="section-padding overflow-hidden" style={{ background: 'hsl(var(--cream-50))' }}>
-      <div className="container mx-auto" style={{ maxWidth: '100%', overflow: 'hidden' }}>
+    <section ref={sectionRef} id="journey-section" className="section-padding" style={{ background: 'hsl(var(--cream-50))' }}>
+      <div className="container mx-auto" style={{ maxWidth: '100%' }}>
         <ScrollReveal>
           <div className="text-center mb-14 md:mb-20">
             <div className="flex items-center justify-center gap-3 mb-4">
