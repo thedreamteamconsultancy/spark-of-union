@@ -36,14 +36,17 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    const fadeOutDelay = 2200;
+    const completeDelay = 2520;
+
     const timers = [
       setTimeout(() => setPhase(1), 200),
       setTimeout(() => setPhase(2), 600),
       setTimeout(() => setPhase(3), 800),
       setTimeout(() => setPhase(4), 1400),
       setTimeout(() => setPhase(5), 1700),
-      setTimeout(() => setFadeOut(true), 2400),
-      setTimeout(() => onComplete(), 2800),
+      setTimeout(() => setFadeOut(true), fadeOutDelay),
+      setTimeout(() => onComplete(), completeDelay),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
@@ -54,8 +57,10 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       style={{
         backgroundColor: 'hsl(30 50% 4%)',
         opacity: fadeOut ? 0 : 1,
-        transitionDuration: '600ms',
+        pointerEvents: fadeOut ? 'none' : 'auto',
+        transitionDuration: '320ms',
         transitionTimingFunction: 'var(--ease-luxury)',
+        willChange: 'opacity',
       }}
     >
       {/* Mandala */}
@@ -103,7 +108,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
             style={{
               backgroundColor: 'hsl(40 52% 54%)',
               width: phase >= 5 ? '100%' : '0%',
-              transition: 'width 900ms linear',
+              transition: 'width 700ms linear',
             }}
           />
         </div>
