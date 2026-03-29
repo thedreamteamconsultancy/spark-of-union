@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 
 const HERO_IMAGES = [
@@ -51,7 +51,6 @@ const HeroSection = () => {
   const [imgVisible, setImgVisible] = useState(true);
   const [imagesReady, setImagesReady] = useState(false);
 
-  // Preload all hero images before showing
   useEffect(() => {
     let loaded = 0;
     HERO_IMAGES.forEach((src) => {
@@ -61,12 +60,10 @@ const HeroSection = () => {
       img.onload = done;
       img.onerror = done;
     });
-    // Fallback: show after 3s even if not all loaded
     const t = setTimeout(() => setImagesReady(true), 3000);
     return () => clearTimeout(t);
   }, []);
 
-  // Text phrase cycle
   useEffect(() => {
     const cycle = setInterval(() => {
       setVisible(false);
@@ -78,7 +75,6 @@ const HeroSection = () => {
     return () => clearInterval(cycle);
   }, []);
 
-  // Image slideshow cycle
   useEffect(() => {
     const cycle = setInterval(() => {
       setImgVisible(false);
@@ -92,9 +88,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative w-full overflow-hidden" style={{ height: '100svh', minHeight: '600px' }}>
-      {/* Image slideshow with crossfade + preloader */}
+      {/* Image slideshow */}
       <div className="absolute inset-0" style={{ background: 'hsl(30 50% 4%)' }}>
-        {/* Shimmer placeholder while images load */}
         {!imagesReady && (
           <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'hsl(30 50% 4%)' }}>
             <div style={{
@@ -127,27 +122,7 @@ const HeroSection = () => {
 
       <GoldParticles />
 
-      {/* Slide indicator dots */}
-      <div className="absolute bottom-20 md:bottom-16 left-1/2 -translate-x-1/2 flex gap-2" style={{ zIndex: 5 }}>
-        {HERO_IMAGES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { setImgVisible(false); setTimeout(() => { setImgIdx(i); setImgVisible(true); }, 400); }}
-            className="transition-all"
-            style={{
-              width: i === imgIdx ? '24px' : '8px',
-              height: '8px',
-              borderRadius: '999px',
-              background: i === imgIdx ? 'hsl(var(--gold-500))' : 'rgba(255,255,255,0.3)',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 0,
-              transition: 'all 400ms ease',
-            }}
-          />
-        ))}
-      </div>
-
+      {/* Main content — vertically centered with form and dots inside */}
       <div
         className="absolute inset-0 flex flex-col items-center justify-center"
         style={{ zIndex: 3, padding: '0 clamp(16px, 5vw, 80px)' }}
@@ -198,7 +173,7 @@ const HeroSection = () => {
           </div>
 
           <p
-            className="font-body font-light mx-auto mb-8"
+            className="font-body font-light mx-auto mb-6"
             style={{
               fontSize: 'clamp(13px, 1.5vw, 17px)',
               color: 'rgba(255,255,255,0.6)',
@@ -212,6 +187,7 @@ const HeroSection = () => {
             Telangana & beyond. 100% Verified. Personally Matchmade.
           </p>
 
+          {/* Search form */}
           <div
             className="mx-auto"
             style={{
@@ -273,6 +249,27 @@ const HeroSection = () => {
                 Let's Begin
               </button>
             </div>
+          </div>
+
+          {/* Slide indicator dots — inside the content block, below the form */}
+          <div className="flex justify-center gap-2 mt-5" style={{ animation: 'fadeUp 0.8s var(--ease-luxury) 1.2s both' }}>
+            {HERO_IMAGES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setImgVisible(false); setTimeout(() => { setImgIdx(i); setImgVisible(true); }, 400); }}
+                className="transition-all"
+                style={{
+                  width: i === imgIdx ? '24px' : '8px',
+                  height: '8px',
+                  borderRadius: '999px',
+                  background: i === imgIdx ? 'hsl(var(--gold-500))' : 'rgba(255,255,255,0.3)',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                  transition: 'all 400ms ease',
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
