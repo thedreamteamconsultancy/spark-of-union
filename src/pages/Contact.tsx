@@ -168,8 +168,8 @@ const Contact = () => {
                       <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Message</label>
                       <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[13px] resize-none" style={{ ...inputStyle, height: '80px', padding: '10px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
-                    <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 btn-gold" style={{
-                      height: '48px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
+                    <button type="submit" className="w-full font-body text-[13px] font-semibold flex items-center justify-center gap-2 btn-gold" style={{
+                      height: '42px', background: 'linear-gradient(135deg, #C9A84C 0%, #B8923A 100%)', color: '#0F0A05',
                       borderRadius: '14px', border: 'none', letterSpacing: '0.05em', boxShadow: '0 4px 24px rgba(201,168,76,0.35)', cursor: 'pointer',
                     }}>
                       <Send className="w-4 h-4" /> Send Message & Request Callback →
