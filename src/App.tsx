@@ -58,7 +58,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <div style={{ background: 'hsl(30 50% 4%)', minHeight: '100vh' }}>
+        <div style={{ background: 'hsl(30 50% 4%)', minHeight: '100vh', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
           <div style={{ opacity: contentVisible ? 1 : 0, transition: 'opacity 0.3s ease' }}>
             <BrowserRouter>
               <AnimatedRoutes />
