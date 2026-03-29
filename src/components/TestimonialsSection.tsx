@@ -32,17 +32,9 @@ const TestimonialsSection = () => {
   const [active, setActive] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
 
-  const goTo = useCallback((index: number) => {
-    setActive(index);
-  }, []);
-
-  const next = useCallback(() => {
-    setActive(prev => (prev + 1) % testimonials.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setActive(prev => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
+  const goTo = useCallback((index: number) => setActive(index), []);
+  const next = useCallback(() => setActive(prev => (prev + 1) % testimonials.length), []);
+  const prev = useCallback(() => setActive(prev => (prev - 1 + testimonials.length) % testimonials.length), []);
 
   useEffect(() => {
     const timer = setInterval(next, 5000);
@@ -59,28 +51,10 @@ const TestimonialsSection = () => {
       return diff;
     })();
 
-    if (actualDiff === 0) {
-      return {
-        transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(1)',
-        opacity: 1, zIndex: 10, filter: 'brightness(1)',
-      };
-    }
-    if (actualDiff === 1) {
-      return {
-        transform: 'translateX(calc(-50% + 65%)) perspective(1200px) rotateY(-35deg) scale(0.78)',
-        opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)',
-      };
-    }
-    if (actualDiff === -1) {
-      return {
-        transform: 'translateX(calc(-50% - 65%)) perspective(1200px) rotateY(35deg) scale(0.78)',
-        opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)',
-      };
-    }
-    return {
-      transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(0.6)',
-      opacity: 0, zIndex: 0, filter: 'brightness(0.3)',
-    };
+    if (actualDiff === 0) return { transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(1)', opacity: 1, zIndex: 10, filter: 'brightness(1)' };
+    if (actualDiff === 1) return { transform: 'translateX(calc(-50% + 65%)) perspective(1200px) rotateY(-35deg) scale(0.78)', opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)' };
+    if (actualDiff === -1) return { transform: 'translateX(calc(-50% - 65%)) perspective(1200px) rotateY(35deg) scale(0.78)', opacity: 0.5, zIndex: 5, filter: 'brightness(0.5)' };
+    return { transform: 'translateX(-50%) perspective(1200px) rotateY(0deg) scale(0.6)', opacity: 0, zIndex: 0, filter: 'brightness(0.3)' };
   };
 
   return (
@@ -131,9 +105,9 @@ const TestimonialsSection = () => {
                 alt={t.names}
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
-                  transition: 'transform 0.6s ease, filter 0.6s ease',
-                  transform: isHovered ? 'scale(1.06)' : 'scale(1)',
-                  filter: isHovered ? 'brightness(0.85) saturate(1.1)' : 'brightness(0.45) saturate(0.9)',
+                  transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0, 1), filter 0.8s ease',
+                  transform: isHovered ? 'scale(1.07)' : 'scale(1)',
+                  filter: isHovered ? 'brightness(0.75) saturate(1.1)' : 'brightness(0.4) saturate(0.9)',
                 }}
                 loading="lazy"
                 onError={(e) => {
@@ -142,11 +116,11 @@ const TestimonialsSection = () => {
                 }}
               />
 
-              {/* Dark overlay — fades on hover */}
+              {/* Dark overlay — cinematic reveal on hover */}
               <div className="absolute inset-0 pointer-events-none" style={{
-                background: 'linear-gradient(to top, rgba(10,5,2,0.98) 0%, rgba(10,5,2,0.8) 35%, rgba(10,5,2,0.3) 60%, transparent 80%)',
-                opacity: isHovered ? 0.25 : 1,
-                transition: 'opacity 0.6s ease',
+                background: 'linear-gradient(to top, rgba(10,5,2,0.95) 0%, rgba(10,5,2,0.6) 40%, rgba(10,5,2,0.2) 70%, transparent 100%)',
+                opacity: isHovered ? 0.15 : 1,
+                transition: 'opacity 0.7s ease',
               }} />
 
               {/* Left gold accent */}
@@ -159,38 +133,44 @@ const TestimonialsSection = () => {
                 ))}
               </div>
 
-              {/* Content — has its own dark bg pill for readability */}
-              <div className="absolute bottom-0 left-0 right-0" style={{ zIndex: 2, padding: 'clamp(20px, 4vw, 36px) clamp(20px, 3vw, 32px)' }}>
-                <div style={{
-                  background: isHovered ? 'rgba(10,5,2,0.75)' : 'transparent',
-                  borderRadius: '16px',
-                  padding: isHovered ? '16px' : '0',
-                  transition: 'all 0.6s ease',
-                  backdropFilter: isHovered ? 'blur(8px)' : 'none',
+              {/* Content — always-readable gradient bg */}
+              <div className="absolute bottom-0 left-0 right-0" style={{
+                zIndex: 2,
+                background: 'linear-gradient(to top, rgba(10,5,2,0.95) 0%, rgba(10,5,2,0.7) 60%, transparent 100%)',
+                padding: '28px 24px 24px',
+              }}>
+                <span className="block font-display" style={{ fontSize: 'clamp(32px, 5vw, 48px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
+                <p className="font-accent" style={{
+                  fontSize: 'clamp(13px, 1.4vw, 15px)',
+                  color: 'rgba(255,255,255,0.9)',
+                  lineHeight: 1.6,
+                  marginTop: '-4px',
+                  fontStyle: 'italic',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
                 }}>
-                  <span className="block font-display" style={{ fontSize: 'clamp(40px, 6vw, 64px)', color: 'hsla(40,52%,54%,0.25)', lineHeight: 0.9 }}>"</span>
-                  <p className="font-accent" style={{ fontSize: 'clamp(14px, 1.6vw, 18px)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: '-8px', fontStyle: 'italic' }}>
-                    {t.quote}
-                  </p>
+                  {t.quote}
+                </p>
 
-                  <div className="flex items-center gap-3 mt-5">
-                    <div className="flex -space-x-3">
-                      {t.initials.map((init, idx) => (
-                        <div key={idx} className="w-10 h-10 rounded-full flex items-center justify-center font-display text-[15px] font-semibold" style={{
-                          background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
-                          border: '2px solid hsl(var(--gold-500))',
-                          color: 'hsl(var(--gold-300))',
-                        }}>
-                          {init}
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <p className="font-display font-semibold text-[16px] text-white">{t.names}</p>
-                      <p className="font-body font-light text-[11px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
-                        {t.detail}
-                      </p>
-                    </div>
+                <div className="flex items-center gap-3 mt-4">
+                  <div className="flex -space-x-3">
+                    {t.initials.map((init, idx) => (
+                      <div key={idx} className="w-9 h-9 rounded-full flex items-center justify-center font-display text-[14px] font-semibold" style={{
+                        background: idx === 0 ? 'linear-gradient(135deg, hsl(var(--maroon-700)), hsl(var(--maroon-900)))' : 'linear-gradient(135deg, hsl(var(--gold-700)), hsl(var(--gold-900)))',
+                        border: '2px solid hsl(var(--gold-500))',
+                        color: 'hsl(var(--gold-300))',
+                      }}>
+                        {init}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="font-display font-semibold text-[15px] text-white">{t.names}</p>
+                    <p className="font-body font-light text-[11px]" style={{ letterSpacing: '0.06em', color: 'hsla(40,52%,54%,0.65)' }}>
+                      {t.detail}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -202,11 +182,7 @@ const TestimonialsSection = () => {
         <button
           onClick={prev}
           className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all"
-          style={{
-            left: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px',
-            borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)',
-            backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C',
-          }}
+          style={{ left: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)', backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C' }}
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.15)'; }}
           onMouseLeave={e => { e.currentTarget.style.background = 'rgba(15,10,5,0.6)'; }}
         >
@@ -215,11 +191,7 @@ const TestimonialsSection = () => {
         <button
           onClick={next}
           className="absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all"
-          style={{
-            right: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px',
-            borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)',
-            backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C',
-          }}
+          style={{ right: 'clamp(8px, 3vw, 40px)', width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(15,10,5,0.6)', border: '1px solid hsla(40,52%,54%,0.3)', backdropFilter: 'blur(8px)', cursor: 'pointer', color: '#C9A84C' }}
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(201,168,76,0.15)'; }}
           onMouseLeave={e => { e.currentTarget.style.background = 'rgba(15,10,5,0.6)'; }}
         >
@@ -233,13 +205,7 @@ const TestimonialsSection = () => {
           <button
             key={i}
             onClick={() => goTo(i)}
-            style={{
-              width: active === i ? '28px' : '8px',
-              height: '8px', borderRadius: '999px',
-              background: active === i ? '#C9A84C' : 'rgba(201,168,76,0.25)',
-              border: 'none', cursor: 'pointer', padding: 0,
-              transition: 'all 300ms ease',
-            }}
+            style={{ width: active === i ? '28px' : '8px', height: '8px', borderRadius: '999px', background: active === i ? '#C9A84C' : 'rgba(201,168,76,0.25)', border: 'none', cursor: 'pointer', padding: 0, transition: 'all 300ms ease' }}
             aria-label={`Go to story ${i + 1}`}
           />
         ))}

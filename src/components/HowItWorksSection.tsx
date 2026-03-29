@@ -42,7 +42,7 @@ const HowItWorksSection = () => {
   const isStepActive = (i: number) => activeStep >= 0 && i <= activeStep;
 
   return (
-    <section ref={sectionRef} id="journey-section" className="section-padding" style={{ background: 'hsl(var(--cream-50))' }}>
+    <section ref={sectionRef} id="journey-section" className="section-padding" style={{ background: 'hsl(var(--cream-50))', overflow: 'hidden' }}>
       <div className="container mx-auto" style={{ maxWidth: '1100px' }}>
         <ScrollReveal>
           <div className="text-center mb-14 md:mb-16">
@@ -61,13 +61,15 @@ const HowItWorksSection = () => {
         </ScrollReveal>
 
         {/* Desktop timeline */}
-        <div className="hidden md:block relative" style={{ overflow: 'hidden' }}>
-          <div className="grid grid-cols-4" style={{ gap: '24px' }}>
-            {/* Connecting line — spans from center of col 1 to center of col 4 */}
+        <div className="hidden md:block" style={{ overflow: 'hidden', position: 'relative', width: '100%', maxWidth: '100%' }}>
+          <div style={{ display: 'flex', gap: '24px', position: 'relative', width: '100%', maxWidth: '100%' }}>
+            {/* Connecting line — uses first/last step center via flex positioning */}
+            {/* We position it relative to the flex container. Each item is 1/4 width.
+                Center of first = 12.5%, center of last = 87.5% */}
             <div className="absolute pointer-events-none" style={{
               top: '36px',
-              left: 'calc(12.5%)',
-              right: 'calc(12.5%)',
+              left: 'calc(100% / 8)',
+              width: 'calc(100% * 6 / 8)',
               height: '2px',
               zIndex: 0,
             }}>
@@ -82,7 +84,7 @@ const HowItWorksSection = () => {
             {steps.map((step, i) => {
               const active = isStepActive(i);
               return (
-                <div key={step.number} className="flex flex-col items-center text-center relative" style={{ zIndex: 1 }}>
+                <div key={step.number} className="flex flex-col items-center text-center relative" style={{ zIndex: 1, flex: '1 1 0%', minWidth: 0 }}>
                   {/* Circle */}
                   <div className="relative mb-3">
                     <div className="flex items-center justify-center" style={{
