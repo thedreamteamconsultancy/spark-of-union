@@ -42,7 +42,7 @@ const Contact = () => {
       <Header />
 
       {/* Hero */}
-      <section className="relative flex items-center justify-center pt-16 overflow-hidden" style={{ height: '50vh', minHeight: '300px' }}>
+      <section className="relative flex items-center justify-center pt-16 overflow-hidden" style={{ height: 'clamp(40vh, 45vh, 50vh)', minHeight: '240px' }}>
         <div className="absolute inset-0">
           <img
             src={CONTACT_HERO} alt="" className="w-full h-full object-cover" loading="eager"
