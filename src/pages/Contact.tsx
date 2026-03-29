@@ -73,7 +73,7 @@ const Contact = () => {
             <div>
               <ScrollReveal>
                 <h2 className="font-display font-light mb-3" style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', color: '#0F0A05' }}>Let's Begin Your Story</h2>
-                <p className="font-accent text-[18px] mb-10" style={{ color: '#9B7A2A' }}>Every great match starts with a conversation</p>
+                <p className="font-accent text-[18px] mb-6 lg:mb-10" style={{ color: '#9B7A2A' }}>Every great match starts with a conversation</p>
 
                 <div className="space-y-6 mb-10">
                   {[
