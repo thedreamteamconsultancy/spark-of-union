@@ -149,7 +149,7 @@ const Contact = () => {
                       <input type="email" placeholder="you@email.com" style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>I am looking for</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>I am looking for</label>
               <div className="grid grid-cols-2 gap-3">
                         {(["Bride", "Groom"] as const).map(g => (
                           <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[14px] font-medium transition-all btn-gold" style={{
