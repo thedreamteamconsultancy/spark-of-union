@@ -141,8 +141,8 @@ const Contact = () => {
                       <input type="text" placeholder="Your full name" required style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Phone Number</label>
-                      <input type="tel" placeholder="+91 98765 43210" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
+                      <label className="font-body text-[11px] tracking-[0.08em] uppercase block mb-1" style={{ color: '#7A6550' }}>Phone Number</label>
+                      <input type="tel" placeholder="+91 98765 43210" required style={{ ...inputStyle, height: '40px', fontSize: '14px' }} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
                       <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Email Address</label>
