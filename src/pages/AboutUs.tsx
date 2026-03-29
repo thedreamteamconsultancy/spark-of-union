@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 const ABOUT_HERO = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1920&q=75";
 const ABOUT_FALLBACK = "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1920&q=75";
 const STORY_IMG = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80";
-const CHAIRMAN_IMG = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80";
+const CHAIRMAN_IMG = "https://res.cloudinary.com/djlrarljg/image/upload/v1774790524/1_gyolvt.jpg";
 
 const stats = [
   { icon: Heart, value: 10000, suffix: "+", label: "Happy Matches" },
