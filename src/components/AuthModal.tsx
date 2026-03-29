@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 const LOGO_URL = "https://res.cloudinary.com/dvmrhs2ek/image/upload/v1774700099/wjibi9xge8sdyxqhi09a.png";
 
@@ -65,7 +66,7 @@ const AuthModal = ({ open, onClose, initialMode }: AuthModalProps) => {
     e.currentTarget.style.transform = 'scale(0.97)';
   };
 
-  return (
+  const modalContent = (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center"
       style={{ padding: '16px' }}
@@ -81,7 +82,7 @@ const AuthModal = ({ open, onClose, initialMode }: AuthModalProps) => {
         onClick={onClose}
       />
 
-      {/* Modal Card — fixed centering */}
+      {/* Modal Card */}
       <div
         className="relative z-10 w-full transition-all duration-300 overflow-hidden"
         style={{
@@ -143,7 +144,7 @@ const AuthModal = ({ open, onClose, initialMode }: AuthModalProps) => {
           ))}
         </div>
 
-        {/* Form Body — compact */}
+        {/* Form Body */}
         <div style={{ padding: '16px clamp(16px,4vw,28px) 14px' }}>
           {mode === "login" ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -272,6 +273,8 @@ const AuthModal = ({ open, onClose, initialMode }: AuthModalProps) => {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default AuthModal;

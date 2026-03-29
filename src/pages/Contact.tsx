@@ -124,7 +124,7 @@ const Contact = () => {
               <div className="relative overflow-hidden" style={{ background: 'white', borderRadius: 'clamp(16px,3vw,28px)', border: '1px solid rgba(201,168,76,0.15)', padding: 'clamp(20px,4vw,52px)', boxShadow: '0 12px 64px rgba(15,10,5,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-[2px]" style={{ background: 'linear-gradient(90deg, #C9A84C, #8B2E2E)' }} />
                 <h2 className="font-display font-semibold mb-2" style={{ fontSize: 'clamp(24px, 3vw, 30px)', color: '#2C1F10' }}>Send Us a Message</h2>
-                <p className="font-body font-light text-[14px] mb-10" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
+                <p className="font-body font-light text-[14px] mb-6" style={{ color: '#9B7A2A' }}>We'll get back to you within 4 hours</p>
 
                 {submitted ? (
                   <div className="text-center py-16">
@@ -135,21 +135,21 @@ const Contact = () => {
                     <p className="font-body font-light text-[15px]" style={{ color: '#7A6550' }}>Our team will reach out to you shortly.</p>
                   </div>
                 ) : (
-                  <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
+                  <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Full Name</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Full Name</label>
                       <input type="text" placeholder="Your full name" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Phone Number</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Phone Number</label>
                       <input type="tel" placeholder="+91 98765 43210" required style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Email Address</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Email Address</label>
                       <input type="email" placeholder="you@email.com" style={inputStyle} onFocus={focusHandler} onBlur={blurHandler} />
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>I am looking for</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>I am looking for</label>
               <div className="grid grid-cols-2 gap-3">
                         {(["Bride", "Groom"] as const).map(g => (
                           <button key={g} type="button" onClick={() => setLookingFor(g)} className="font-body text-[14px] font-medium transition-all btn-gold" style={{
@@ -165,7 +165,7 @@ const Contact = () => {
                       </div>
                     </div>
                     <div>
-                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-2.5" style={{ color: '#7A6550' }}>Message</label>
+                      <label className="font-body text-[12px] tracking-[0.08em] uppercase block mb-1.5" style={{ color: '#7A6550' }}>Message</label>
                       <textarea rows={3} placeholder="Tell us how we can help..." required className="w-full font-body font-light text-[14px] resize-none" style={{ ...inputStyle, height: '100px', padding: '12px 16px' }} onFocus={focusHandler as any} onBlur={blurHandler as any} />
                     </div>
                     <button type="submit" className="w-full font-body text-[14px] font-semibold flex items-center justify-center gap-2.5 btn-gold" style={{

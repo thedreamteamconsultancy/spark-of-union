@@ -41,16 +41,8 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   const [showLoading, setShowLoading] = useState(true);
-  const [contentVisible, setContentVisible] = useState(false);
   const handleLoadingComplete = useCallback(() => {
-    // First make content visible behind loading screen
-    setContentVisible(true);
-    // Then remove loading screen after content has rendered
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setShowLoading(false);
-      });
-    });
+    setShowLoading(false);
   }, []);
 
   return (
@@ -59,11 +51,9 @@ const App = () => {
         <Toaster />
         <Sonner />
         <div style={{ background: 'hsl(30 50% 4%)', minHeight: '100vh', overflowX: 'hidden', width: '100%', maxWidth: '100vw' }}>
-          <div style={{ opacity: contentVisible ? 1 : 0, transition: 'opacity 0.3s ease' }}>
-            <BrowserRouter>
-              <AnimatedRoutes />
-            </BrowserRouter>
-          </div>
+          <BrowserRouter>
+            <AnimatedRoutes />
+          </BrowserRouter>
         </div>
         {showLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       </TooltipProvider>
