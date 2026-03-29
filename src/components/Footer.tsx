@@ -10,8 +10,8 @@ const Footer = () => {
       <div className="h-[1px]" style={{ background: 'hsla(40,52%,54%,0.2)' }} />
 
       <div className="container mx-auto px-4 py-16 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          <div className="sm:col-span-2 lg:col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-12">
+          <div className="lg:col-span-1">
             <img src={LOGO_URL} alt="Kammavaari Matrimony" className="mb-4" style={{ height: '36px', filter: 'brightness(0.9)' }} />
             <p className="font-body font-light text-[13px] leading-[1.75] mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
               A trusted community matrimony platform helping families find the perfect match with verified profiles and personalized matchmaking.
