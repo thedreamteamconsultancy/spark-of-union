@@ -105,7 +105,7 @@ const Contact = () => {
                 </a>
                 <p className="font-body font-light text-[11px] text-center mt-3" style={{ color: '#9B7A2A' }}>Usually responds within 30 minutes</p>
 
-                <div className="mt-8 bg-white rounded-[20px] p-6" style={{ border: '1px solid rgba(201,168,76,0.12)' }}>
+                <div className="mt-6 bg-white rounded-[20px] p-4 lg:p-6" style={{ border: '1px solid rgba(201,168,76,0.12)' }}>
                   <h4 className="font-body font-medium text-[13px] tracking-[0.08em] uppercase mb-4" style={{ color: '#5C4510' }}>Office Hours</h4>
                   <div className="space-y-3">
                     <div className="flex justify-between font-body font-light text-[14px]" style={{ color: '#7A6550' }}>
