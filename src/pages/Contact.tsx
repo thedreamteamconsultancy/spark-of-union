@@ -181,7 +181,7 @@ const Contact = () => {
           </div>
 
           {/* Map + Branches */}
-          <div className="max-w-6xl mx-auto mt-20">
+          <div className="max-w-6xl mx-auto mt-10 lg:mt-20">
             <div style={{ borderTop: '1px solid rgba(201,168,76,0.12)', paddingTop: 'clamp(36px,5vw,56px)' }}>
               <ScrollReveal>
                 <div className="text-center mb-10">
